@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Profile Switcher — Quran Odyssey Module 5</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ─────────────────────────────────────────────────────────────
-   Quran Odyssey · Module 5 · Screen 1 — Profile Switcher
-   Board shows the SAME screen at 3 widths via CSS container queries.
-   Tokens mirror src/app/theme.css (brand + 8 stage colours + beats).
-   ───────────────────────────────────────────────────────────── */
 :root{
   --teal:#28b7d9; --teal-mid:#1a9abf; --teal-dark:#0e6e8a;
   --teal-pale:#e8f8fc; --teal-border:rgba(40,183,217,.25);
@@ -20,155 +11,86 @@
   --navy:#0d2840; --navy-mid:#111d2b; --navy-soft:#16324c;
   --white:#fff; --off-white:#f7f9fb; --surface:#f0f4f8; --border:#e2e8f0;
   --ink:#0f172a; --text-2:#64748b; --muted:#94a3b8;
-  /* 8 stage colours, cool → warm */
   --stage-1:#94a3b8; --stage-2:#5fd0ec; --stage-3:#28b7d9; --stage-4:#0e6e8a;
   --stage-5:#8b5cf6; --stage-6:#faa71a; --stage-7:#e8920a; --stage-8:#0d2840;
-  --beat-1:200ms; --beat-2:400ms; --beat-3:700ms;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#e9eef3;
   color:var(--ink);-webkit-font-smoothing:antialiased;padding:48px 0 80px}
-
-/* ── Board scaffold (the review canvas; not part of the product) ── */
 .board{max-width:1520px;margin:0 auto;padding:0 24px}
-.board-title{text-align:center;margin-bottom:8px;font-size:22px;font-weight:800;
-  letter-spacing:-.5px;color:var(--navy)}
+.board-title{text-align:center;margin-bottom:8px;font-size:22px;font-weight:800;letter-spacing:-.5px;color:var(--navy)}
 .board-sub{text-align:center;color:var(--text-2);font-size:14px;margin-bottom:44px}
 .frame-wrap{margin:0 auto 56px;display:flex;flex-direction:column;align-items:center}
-.frame-label{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;
-  letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.frame-label{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
 .frame-label b{color:var(--navy);font-weight:800}
-.frame{background:var(--white);border:1px solid #d5dde5;border-radius:22px;overflow:hidden;
-  box-shadow:0 24px 60px rgba(13,40,64,.10);container-type:inline-size}
+.frame{background:var(--white);border:1px solid #d5dde5;border-radius:22px;overflow:hidden;box-shadow:0 24px 60px rgba(13,40,64,.10);container-type:inline-size}
 .f-phone{width:360px} .f-tablet{width:768px} .f-desktop{width:1440px}
-
-/* ── The Profile Switcher screen ─────────────────────────────── */
 .qo{position:relative;background:
     radial-gradient(120% 90% at 88% -6%, rgba(40,183,217,.10), transparent 60%),
     radial-gradient(120% 90% at 6% 108%, rgba(250,167,26,.09), transparent 58%),
     var(--off-white);
   padding:26px 22px 40px;min-height:520px;display:flex;flex-direction:column}
-
-/* top bar */
 .qo-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:auto}
-.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.3px;
-  font-size:15px;color:var(--navy)}
-.brand .mark{width:28px;height:28px;border-radius:9px;
-  background:linear-gradient(135deg,var(--teal),var(--teal-dark));display:flex;
-  align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(40,183,217,.35)}
-.sound{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;
-  color:var(--teal-dark);background:var(--teal-pale);border:1px solid var(--teal-border);
-  border-radius:999px;padding:6px 12px;cursor:pointer;transition:transform .15s ease}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.3px;font-size:15px;color:var(--navy)}
+.brand .mark{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(40,183,217,.35)}
+.sound{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--teal-dark);background:var(--teal-pale);border:1px solid var(--teal-border);border-radius:999px;padding:6px 12px;cursor:pointer;transition:transform .15s ease}
 .sound:hover{transform:translateY(-1px)}
-
-/* heading */
 .qo-head{text-align:center;margin:22px 0 30px}
-.chip{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;
-  letter-spacing:.66px;text-transform:uppercase;color:var(--teal-dark);
-  background:var(--teal-pale);border:1px solid var(--teal-border);border-radius:999px;
-  padding:5px 13px;margin-bottom:16px}
+.chip{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.66px;text-transform:uppercase;color:var(--teal-dark);background:var(--teal-pale);border:1px solid var(--teal-border);border-radius:999px;padding:5px 13px;margin-bottom:16px}
 .chip .dot{width:6px;height:6px;border-radius:50%;background:var(--teal)}
-.qo-head h1{font-size:clamp(1.7rem,1.3rem+2.4cqi,2.6rem);font-weight:800;line-height:1.12;
-  letter-spacing:-1px;color:var(--ink)}
+.qo-head h1{font-size:clamp(1.7rem,1.3rem+2.4cqi,2.6rem);font-weight:800;line-height:1.12;letter-spacing:-1px;color:var(--ink)}
 .qo-head h1 .accent{color:var(--teal)}
 .qo-head p{margin-top:10px;color:var(--text-2);font-size:15px}
-
-/* profile grid */
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;
-  max-width:940px;margin:0 auto;width:100%}
-
-/* a profile card */
-.card{position:relative;background:var(--white);border:1px solid var(--border);
-  border-radius:20px;padding:22px 16px 18px;display:flex;flex-direction:column;
-  align-items:center;gap:12px;cursor:pointer;
-  transition:transform .22s cubic-bezier(.2,.7,.3,1),box-shadow .22s ease,border-color .22s ease}
-.card:hover{transform:translateY(-6px);border-color:var(--teal-border);
-  box-shadow:0 18px 40px rgba(40,183,217,.16)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:940px;margin:0 auto;width:100%}
+.card{position:relative;background:var(--white);border:1px solid var(--border);border-radius:20px;padding:22px 16px 18px;display:flex;flex-direction:column;align-items:center;gap:12px;cursor:pointer;transition:transform .22s cubic-bezier(.2,.7,.3,1),box-shadow .22s ease,border-color .22s ease}
+.card:hover{transform:translateY(-6px);border-color:var(--teal-border);box-shadow:0 18px 40px rgba(40,183,217,.16)}
 .card:active{transform:translateY(-2px) scale(.99)}
-
-/* avatar: stage-coloured ring + soft disc + symbol */
-.ava{position:relative;width:104px;height:104px;border-radius:50%;display:flex;
-  align-items:center;justify-content:center}
-.ava .ring{position:absolute;inset:0;border-radius:50%;padding:5px;
-  background:conic-gradient(var(--c),var(--c2),var(--c));
-  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 6px),#000 calc(100% - 5px));
-          mask:radial-gradient(farthest-side,transparent calc(100% - 6px),#000 calc(100% - 5px))}
+.ava{position:relative;width:104px;height:104px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.ava .ring{position:absolute;inset:0;border-radius:50%;padding:5px;background:conic-gradient(var(--c),var(--c2),var(--c));
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 6px),#000 calc(100% - 5px));mask:radial-gradient(farthest-side,transparent calc(100% - 6px),#000 calc(100% - 5px))}
 .card:hover .ring{animation:spin 5s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.ava .disc{width:82px;height:82px;border-radius:50%;background:var(--surface);
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:inset 0 2px 8px rgba(13,40,64,.06)}
-.ava .sym{width:44px;height:44px;color:var(--c);animation:float 4s ease-in-out infinite}
-.card:nth-child(2) .sym{animation-delay:.6s}
-.card:nth-child(3) .sym{animation-delay:1.2s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.ava .disc{width:82px;height:82px;border-radius:50%;background:var(--surface);overflow:hidden;display:flex;align-items:flex-end;justify-content:center;box-shadow:inset 0 2px 8px rgba(13,40,64,.06)}
+.ava-svg{width:96%;height:96%;transform:translateY(4%);animation:float 4s ease-in-out infinite}
+.card:nth-child(2) .ava-svg{animation-delay:.6s}.card:nth-child(3) .ava-svg{animation-delay:1.2s}
+@keyframes float{0%,100%{transform:translateY(4%)}50%{transform:translateY(0)}}
 .name{font-size:19px;font-weight:800;letter-spacing:-.3px;color:var(--ink)}
-.stage{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;
-  color:var(--teal-dark);background:var(--teal-pale);border:1px solid var(--teal-border);
-  border-radius:999px;padding:4px 11px}
+.stage{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--teal-dark);background:var(--teal-pale);border:1px solid var(--teal-border);border-radius:999px;padding:4px 11px}
 .stage .sdot{width:7px;height:7px;border-radius:50%;background:var(--c)}
-
-/* parent card — distinct navy */
 .card.parent{background:var(--navy);border-color:var(--navy-soft)}
 .card.parent:hover{box-shadow:0 18px 40px rgba(13,40,64,.30)}
 .card.parent .ava .disc{background:rgba(255,255,255,.06)}
-.card.parent .ava .sym{color:#fff;animation:none}
 .card.parent .ava .ring{background:conic-gradient(var(--gold),var(--gold-dark),var(--gold))}
 .card.parent .name{color:#fff}
-.card.parent .stage{background:rgba(40,183,217,.15);border-color:rgba(40,183,217,.3);
-  color:var(--teal)}
+.card.parent .stage{background:rgba(40,183,217,.15);border-color:rgba(40,183,217,.3);color:var(--teal)}
 .card.parent .stage .sdot{background:var(--gold)}
-
-/* add-child card — dashed ghost */
-.card.add{background:transparent;border:2px dashed #cbd5e1;justify-content:center;
-  min-height:100%;gap:10px}
+.card.add{background:transparent;border:2px dashed #cbd5e1;justify-content:center;min-height:100%;gap:10px}
 .card.add:hover{border-color:var(--teal);box-shadow:none;background:rgba(40,183,217,.03)}
-.card.add .plus{width:56px;height:56px;border-radius:50%;background:var(--surface);
-  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
-  color:var(--muted)}
+.card.add .plus{width:56px;height:56px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted)}
 .card.add:hover .plus{color:var(--teal);border-color:var(--teal-border)}
 .card.add .name{font-size:15px;font-weight:700;color:var(--text-2)}
-
-/* ── Container responsiveness: the three modes ──────────────── */
-/* phone (≤ 420): 2-up, parent + add span full width */
-@container (max-width:420px){
-  .qo{padding:22px 16px 34px}
-  .grid{gap:12px}
-  .ava{width:92px;height:92px}.ava .disc{width:72px;height:72px}.ava .sym{width:38px;height:38px}
-  .card.parent,.card.add{grid-column:1 / -1;flex-direction:row;justify-content:flex-start;
-    gap:16px;padding:16px 18px}
-  .card.parent .ava,.card.add .ava,.card.add .plus{width:56px;height:56px;flex-shrink:0}
-  .card.parent .ava .disc{width:56px;height:56px}.card.parent .ava .sym{width:28px;height:28px}
-  .card.parent{align-items:center}
-  .card.parent .txt,.card.add .txt{align-items:flex-start;text-align:left}
-}
-/* tablet (421–1000): 3-up */
-@container (min-width:421px) and (max-width:1000px){
-  .grid{grid-template-columns:repeat(3,1fr);gap:18px}
-  .qo{padding:30px 30px 44px}
-}
-/* desktop (> 1000): centred row of 5, generous */
-@container (min-width:1001px){
-  .qo{padding:44px 60px 60px}
-  .qo-head{margin:30px 0 44px}
-  .grid{grid-template-columns:repeat(5,180px);justify-content:center;gap:22px;max-width:none}
-  .ava{width:120px;height:120px}.ava .disc{width:96px;height:96px}.ava .sym{width:50px;height:50px}
-  .card{padding:26px 18px 20px}
-  .name{font-size:21px}
-}
 .txt{display:flex;flex-direction:column;align-items:center;gap:8px}
 .card.add .txt{gap:4px}
-</style>
-</head>
-<body>
+@container (max-width:420px){
+  .qo{padding:22px 16px 34px}.grid{gap:12px}
+  .ava{width:92px;height:92px}.ava .disc{width:74px;height:74px}
+  .card.parent,.card.add{grid-column:1 / -1;flex-direction:row;justify-content:flex-start;gap:16px;padding:16px 18px}
+  .card.parent .ava,.card.add .plus{width:56px;height:56px;flex-shrink:0}
+  .card.parent .ava .disc{width:56px;height:56px}
+  .card.parent .txt,.card.add .txt{align-items:flex-start;text-align:left}
+}
+@container (min-width:421px) and (max-width:1000px){.grid{grid-template-columns:repeat(3,1fr);gap:18px}.qo{padding:30px 30px 44px}}
+@container (min-width:1001px){
+  .qo{padding:44px 60px 60px}.qo-head{margin:30px 0 44px}
+  .grid{grid-template-columns:repeat(5,180px);justify-content:center;gap:22px;max-width:none}
+  .ava{width:120px;height:120px}.ava .disc{width:96px;height:96px}
+  .card{padding:26px 18px 20px}.name{font-size:21px}
+}
+</style></head><body>
 <div class="board">
   <div class="board-title">Module 5 · Screen 1 — Profile Switcher</div>
-  <div class="board-sub">The front door. One screen, three widths. Netflix-pattern · no numbers shown here · siblings never compared · Parent space set apart.</div>
-
-  <!-- PHONE -->
-  <div class="frame-wrap">
-    <div class="frame-label">Phone · <b>360px</b> — bottom-tab device</div>
-    <div class="frame f-phone"><div class="qo">
+  <div class="board-sub">Faceless gender avatars (kufi · hijab · parent) — no facial features. Netflix pattern · no numbers shown here · siblings never compared · Parent space set apart.</div>
+  <div class="frame-wrap"><div class="frame-label">Phone · <b>360px</b> — bottom-tab device</div><div class="frame f-phone"><div class="qo">
   <div class="qo-top">
     <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M4 4h5.5A2.5 2.5 0 0 1 12 6.5V20a2 2 0 0 0-2-2H4z"/><path d="M20 4h-5.5A2.5 2.5 0 0 0 12 6.5V20a2 2 0 0 1 2-2h6z"/></svg></span> Quran Odyssey</div>
     <button class="sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg> Sounds on</button>
@@ -180,33 +102,39 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#e9eef3;
   </div>
   <div class="grid">
     <div class="card" style="--c:var(--stage-2);--c2:var(--teal)">
-      <div class="ava"><div class="ring"></div><div class="disc"><span class="sym"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span></div></div>
+      <div class="ava"><div class="ring"></div><div class="disc"><svg class="ava-svg" viewBox="0 0 100 100"><defs><linearGradient id="gaz" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs>
+ <path d="M16 98 C16 71 33 61 50 61 C67 61 84 71 84 98 Z" fill="url(#gaz)"/>
+ <circle cx="50" cy="46" r="17" fill="#f6efe2"/>
+ <path d="M32 45 C32 26 39 21 50 21 C61 21 68 26 68 45 C59 40 41 40 32 45 Z" fill="#0d2840"/>
+ <path d="M33 44 C41 40 59 40 67 44" stroke="#fff" stroke-width="2" opacity=".3" fill="none"/></svg></div></div>
       <div class="txt"><div class="name">Zayd</div><div class="stage"><span class="sdot"></span>Stage 2 · Mutaʼallim</div></div>
     </div>
     <div class="card" style="--c:var(--stage-4);--c2:var(--teal-dark)">
-      <div class="ava"><div class="ring"></div><div class="disc"><span class="sym"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 8.6 22 9.3 17 14 18.3 21 12 17.6 5.7 21 7 14 2 9.3 9 8.6"/></svg></span></div></div>
+      <div class="ava"><div class="ring"></div><div class="disc"><svg class="ava-svg" viewBox="0 0 100 100"><defs><linearGradient id="gam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs>
+ <path d="M12 98 C12 75 30 65 50 65 C70 65 88 75 88 98 Z" fill="url(#gam)"/>
+ <path d="M27 53 C27 27 38 17 50 17 C62 17 73 27 73 53 C73 64 65 71 50 71 C35 71 27 64 27 53 Z" fill="url(#gam)"/>
+ <ellipse cx="50" cy="48" rx="13" ry="16" fill="#f6efe2"/></svg></div></div>
       <div class="txt"><div class="name">Meerub</div><div class="stage"><span class="sdot"></span>Stage 4 · Mutawassit</div></div>
     </div>
     <div class="card" style="--c:var(--stage-3);--c2:var(--teal-mid)">
-      <div class="ava"><div class="ring"></div><div class="disc"><span class="sym"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h5.5A2.5 2.5 0 0 1 12 6.5V20a2 2 0 0 0-2-2H4z"/><path d="M20 4h-5.5A2.5 2.5 0 0 0 12 6.5V20a2 2 0 0 1 2-2h6z"/></svg></span></div></div>
+      <div class="ava"><div class="ring"></div><div class="disc"><svg class="ava-svg" viewBox="0 0 100 100"><defs><linearGradient id="gas" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs>
+ <path d="M16 98 C16 71 33 61 50 61 C67 61 84 71 84 98 Z" fill="url(#gas)"/>
+ <circle cx="50" cy="46" r="17" fill="#f6efe2"/>
+ <path d="M32 45 C32 26 39 21 50 21 C61 21 68 26 68 45 C59 40 41 40 32 45 Z" fill="#0d2840"/>
+ <path d="M33 44 C41 40 59 40 67 44" stroke="#fff" stroke-width="2" opacity=".3" fill="none"/></svg></div></div>
       <div class="txt"><div class="name">Saafir</div><div class="stage"><span class="sdot"></span>Stage 3 · Muthābir</div></div>
     </div>
     <div class="card parent" style="--c:var(--gold);--c2:var(--gold-dark)">
-      <div class="ava"><div class="ring"></div><div class="disc"><span class="sym"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span></div></div>
+      <div class="ava"><div class="ring"></div><div class="disc"><svg class="ava-svg" viewBox="0 0 100 100"><defs><linearGradient id="gap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbb43a"/><stop offset="1" stop-color="#e0870a"/></linearGradient></defs>
+ <path d="M10 99 C10 69 30 58 50 58 C70 58 90 69 90 99 Z" fill="url(#gap)"/>
+ <circle cx="50" cy="43" r="18" fill="#f6efe2"/>
+ <path d="M30 42 C30 24 39 18 50 18 C61 18 70 24 70 42 C60 37 40 37 30 42 Z" fill="#0d2840"/></svg></div></div>
       <div class="txt"><div class="name">Parent</div><div class="stage"><span class="sdot"></span>Reports · Billing · Messages</div></div>
     </div>
-    <div class="card add">
-      <div class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
-      <div class="txt"><div class="name">Add child</div></div>
-    </div>
+    <div class="card add"><div class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div><div class="txt"><div class="name">Add child</div></div></div>
   </div>
-</div></div>
-  </div>
-
-  <!-- TABLET -->
-  <div class="frame-wrap">
-    <div class="frame-label">Tablet · <b>768px</b> — icon-rail device</div>
-    <div class="frame f-tablet"><div class="qo">
+</div></div></div>
+  <div class="frame-wrap"><div class="frame-label">Tablet · <b>768px</b> — icon-rail device</div><div class="frame f-tablet"><div class="qo">
   <div class="qo-top">
     <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M4 4h5.5A2.5 2.5 0 0 1 12 6.5V20a2 2 0 0 0-2-2H4z"/><path d="M20 4h-5.5A2.5 2.5 0 0 0 12 6.5V20a2 2 0 0 1 2-2h6z"/></svg></span> Quran Odyssey</div>
     <button class="sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg> Sounds on</button>
@@ -218,33 +146,39 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#e9eef3;
   </div>
   <div class="grid">
     <div class="card" style="--c:var(--stage-2);--c2:var(--teal)">
-      <div class="ava"><div class="ring"></div><div class="disc"><span class="sym"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span></div></div>
+      <div class="ava"><div class="ring"></div><div class="disc"><svg class="ava-svg" viewBox="0 0 100 100"><defs><linearGradient id="gbz" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs>
+ <path d="M16 98 C16 71 33 61 50 61 C67 61 84 71 84 98 Z" fill="url(#gbz)"/>
+ <circle cx="50" cy="46" r="17" fill="#f6efe2"/>
+ <path d="M32 45 C32 26 39 21 50 21 C61 21 68 26 68 45 C59 40 41 40 32 45 Z" fill="#0d2840"/>
+ <path d="M33 44 C41 40 59 40 67 44" stroke="#fff" stroke-width="2" opacity=".3" fill="none"/></svg></div></div>
       <div class="txt"><div class="name">Zayd</div><div class="stage"><span class="sdot"></span>Stage 2 · Mutaʼallim</div></div>
     </div>
     <div class="card" style="--c:var(--stage-4);--c2:var(--teal-dark)">
-      <div class="ava"><div class="ring"></div><div class="disc"><span class="sym"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 8.6 22 9.3 17 14 18.3 21 12 17.6 5.7 21 7 14 2 9.3 9 8.6"/></svg></span></div></div>
+      <div class="ava"><div class="ring"></div><div class="disc"><svg class="ava-svg" viewBox="0 0 100 100"><defs><linearGradient id="gbm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs>
+ <path d="M12 98 C12 75 30 65 50 65 C70 65 88 75 88 98 Z" fill="url(#gbm)"/>
+ <path d="M27 53 C27 27 38 17 50 17 C62 17 73 27 73 53 C73 64 65 71 50 71 C35 71 27 64 27 53 Z" fill="url(#gbm)"/>
+ <ellipse cx="50" cy="48" rx="13" ry="16" fill="#f6efe2"/></svg></div></div>
       <div class="txt"><div class="name">Meerub</div><div class="stage"><span class="sdot"></span>Stage 4 · Mutawassit</div></div>
     </div>
     <div class="card" style="--c:var(--stage-3);--c2:var(--teal-mid)">
-      <div class="ava"><div class="ring"></div><div class="disc"><span class="sym"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h5.5A2.5 2.5 0 0 1 12 6.5V20a2 2 0 0 0-2-2H4z"/><path d="M20 4h-5.5A2.5 2.5 0 0 0 12 6.5V20a2 2 0 0 1 2-2h6z"/></svg></span></div></div>
+      <div class="ava"><div class="ring"></div><div class="disc"><svg class="ava-svg" viewBox="0 0 100 100"><defs><linearGradient id="gbs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs>
+ <path d="M16 98 C16 71 33 61 50 61 C67 61 84 71 84 98 Z" fill="url(#gbs)"/>
+ <circle cx="50" cy="46" r="17" fill="#f6efe2"/>
+ <path d="M32 45 C32 26 39 21 50 21 C61 21 68 26 68 45 C59 40 41 40 32 45 Z" fill="#0d2840"/>
+ <path d="M33 44 C41 40 59 40 67 44" stroke="#fff" stroke-width="2" opacity=".3" fill="none"/></svg></div></div>
       <div class="txt"><div class="name">Saafir</div><div class="stage"><span class="sdot"></span>Stage 3 · Muthābir</div></div>
     </div>
     <div class="card parent" style="--c:var(--gold);--c2:var(--gold-dark)">
-      <div class="ava"><div class="ring"></div><div class="disc"><span class="sym"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span></div></div>
+      <div class="ava"><div class="ring"></div><div class="disc"><svg class="ava-svg" viewBox="0 0 100 100"><defs><linearGradient id="gbp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbb43a"/><stop offset="1" stop-color="#e0870a"/></linearGradient></defs>
+ <path d="M10 99 C10 69 30 58 50 58 C70 58 90 69 90 99 Z" fill="url(#gbp)"/>
+ <circle cx="50" cy="43" r="18" fill="#f6efe2"/>
+ <path d="M30 42 C30 24 39 18 50 18 C61 18 70 24 70 42 C60 37 40 37 30 42 Z" fill="#0d2840"/></svg></div></div>
       <div class="txt"><div class="name">Parent</div><div class="stage"><span class="sdot"></span>Reports · Billing · Messages</div></div>
     </div>
-    <div class="card add">
-      <div class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
-      <div class="txt"><div class="name">Add child</div></div>
-    </div>
+    <div class="card add"><div class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div><div class="txt"><div class="name">Add child</div></div></div>
   </div>
-</div></div>
-  </div>
-
-  <!-- DESKTOP -->
-  <div class="frame-wrap">
-    <div class="frame-label">Desktop · <b>1440px</b> — parent review</div>
-    <div class="frame f-desktop"><div class="qo">
+</div></div></div>
+  <div class="frame-wrap"><div class="frame-label">Desktop · <b>1440px</b> — parent review</div><div class="frame f-desktop"><div class="qo">
   <div class="qo-top">
     <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M4 4h5.5A2.5 2.5 0 0 1 12 6.5V20a2 2 0 0 0-2-2H4z"/><path d="M20 4h-5.5A2.5 2.5 0 0 0 12 6.5V20a2 2 0 0 1 2-2h6z"/></svg></span> Quran Odyssey</div>
     <button class="sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg> Sounds on</button>
@@ -256,28 +190,36 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#e9eef3;
   </div>
   <div class="grid">
     <div class="card" style="--c:var(--stage-2);--c2:var(--teal)">
-      <div class="ava"><div class="ring"></div><div class="disc"><span class="sym"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span></div></div>
+      <div class="ava"><div class="ring"></div><div class="disc"><svg class="ava-svg" viewBox="0 0 100 100"><defs><linearGradient id="gcz" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs>
+ <path d="M16 98 C16 71 33 61 50 61 C67 61 84 71 84 98 Z" fill="url(#gcz)"/>
+ <circle cx="50" cy="46" r="17" fill="#f6efe2"/>
+ <path d="M32 45 C32 26 39 21 50 21 C61 21 68 26 68 45 C59 40 41 40 32 45 Z" fill="#0d2840"/>
+ <path d="M33 44 C41 40 59 40 67 44" stroke="#fff" stroke-width="2" opacity=".3" fill="none"/></svg></div></div>
       <div class="txt"><div class="name">Zayd</div><div class="stage"><span class="sdot"></span>Stage 2 · Mutaʼallim</div></div>
     </div>
     <div class="card" style="--c:var(--stage-4);--c2:var(--teal-dark)">
-      <div class="ava"><div class="ring"></div><div class="disc"><span class="sym"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 8.6 22 9.3 17 14 18.3 21 12 17.6 5.7 21 7 14 2 9.3 9 8.6"/></svg></span></div></div>
+      <div class="ava"><div class="ring"></div><div class="disc"><svg class="ava-svg" viewBox="0 0 100 100"><defs><linearGradient id="gcm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs>
+ <path d="M12 98 C12 75 30 65 50 65 C70 65 88 75 88 98 Z" fill="url(#gcm)"/>
+ <path d="M27 53 C27 27 38 17 50 17 C62 17 73 27 73 53 C73 64 65 71 50 71 C35 71 27 64 27 53 Z" fill="url(#gcm)"/>
+ <ellipse cx="50" cy="48" rx="13" ry="16" fill="#f6efe2"/></svg></div></div>
       <div class="txt"><div class="name">Meerub</div><div class="stage"><span class="sdot"></span>Stage 4 · Mutawassit</div></div>
     </div>
     <div class="card" style="--c:var(--stage-3);--c2:var(--teal-mid)">
-      <div class="ava"><div class="ring"></div><div class="disc"><span class="sym"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h5.5A2.5 2.5 0 0 1 12 6.5V20a2 2 0 0 0-2-2H4z"/><path d="M20 4h-5.5A2.5 2.5 0 0 0 12 6.5V20a2 2 0 0 1 2-2h6z"/></svg></span></div></div>
+      <div class="ava"><div class="ring"></div><div class="disc"><svg class="ava-svg" viewBox="0 0 100 100"><defs><linearGradient id="gcs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs>
+ <path d="M16 98 C16 71 33 61 50 61 C67 61 84 71 84 98 Z" fill="url(#gcs)"/>
+ <circle cx="50" cy="46" r="17" fill="#f6efe2"/>
+ <path d="M32 45 C32 26 39 21 50 21 C61 21 68 26 68 45 C59 40 41 40 32 45 Z" fill="#0d2840"/>
+ <path d="M33 44 C41 40 59 40 67 44" stroke="#fff" stroke-width="2" opacity=".3" fill="none"/></svg></div></div>
       <div class="txt"><div class="name">Saafir</div><div class="stage"><span class="sdot"></span>Stage 3 · Muthābir</div></div>
     </div>
     <div class="card parent" style="--c:var(--gold);--c2:var(--gold-dark)">
-      <div class="ava"><div class="ring"></div><div class="disc"><span class="sym"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span></div></div>
+      <div class="ava"><div class="ring"></div><div class="disc"><svg class="ava-svg" viewBox="0 0 100 100"><defs><linearGradient id="gcp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbb43a"/><stop offset="1" stop-color="#e0870a"/></linearGradient></defs>
+ <path d="M10 99 C10 69 30 58 50 58 C70 58 90 69 90 99 Z" fill="url(#gcp)"/>
+ <circle cx="50" cy="43" r="18" fill="#f6efe2"/>
+ <path d="M30 42 C30 24 39 18 50 18 C61 18 70 24 70 42 C60 37 40 37 30 42 Z" fill="#0d2840"/></svg></div></div>
       <div class="txt"><div class="name">Parent</div><div class="stage"><span class="sdot"></span>Reports · Billing · Messages</div></div>
     </div>
-    <div class="card add">
-      <div class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
-      <div class="txt"><div class="name">Add child</div></div>
-    </div>
+    <div class="card add"><div class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div><div class="txt"><div class="name">Add child</div></div></div>
   </div>
-</div></div>
-  </div>
-</div>
-</body>
-</html>
+</div></div></div>
+</div></body></html>
