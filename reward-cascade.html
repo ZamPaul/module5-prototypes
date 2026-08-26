@@ -1,0 +1,297 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reward Cascade — Quran Odyssey Module 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#e9eef3;color:#0f172a;-webkit-font-smoothing:antialiased;padding:44px 0 80px}
+.board{max-width:1080px;margin:0 auto;padding:0 24px;text-align:center}
+.chip{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.66px;text-transform:uppercase;color:#0e6e8a;background:#e8f8fc;border:1px solid rgba(40,183,217,.25);border-radius:999px;padding:5px 13px;margin-bottom:16px}
+.board h1{font-size:26px;font-weight:800;letter-spacing:-.6px;color:#0d2840}
+.board .sub{color:#64748b;font-size:14px;margin:8px auto 34px;max-width:640px}
+.row{display:flex;gap:36px;justify-content:center;align-items:flex-start;flex-wrap:wrap}
+/* phone frame */
+.phone{width:360px;flex-shrink:0}
+.phone .fl{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#94a3b8;margin-bottom:12px}
+.frame{width:360px;height:720px;background:#fff;border:1px solid #d5dde5;border-radius:26px;overflow:hidden;box-shadow:0 24px 60px rgba(13,40,64,.12);position:relative}
+/* the celebration scene */
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding:30px 24px;
+  background:radial-gradient(120% 70% at 50% 0%,rgba(40,183,217,.14),transparent 55%),
+             radial-gradient(120% 70% at 50% 100%,rgba(250,167,26,.14),transparent 55%),#f7f9fb}
+.confetti i{position:absolute;width:9px;height:14px;border-radius:2px;opacity:0;top:-20px}
+.play .confetti i{animation:fall 2.4s ease-in forwards}
+@keyframes fall{0%{opacity:0;transform:translateY(-10px) rotate(0)}10%{opacity:1}100%{opacity:0;transform:translateY(560px) rotate(320deg)}}
+.done-lbl{font-size:12px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;color:#28b7d9;opacity:0;transform:translateY(8px)}
+.play .done-lbl{animation:rise .5s ease-out .05s forwards}
+.h{font-size:27px;font-weight:800;letter-spacing:-.7px;color:#0d2840;margin-top:8px;opacity:0;transform:translateY(10px) scale(.96)}
+.play .h{animation:pop .55s cubic-bezier(.2,.9,.3,1.3) .12s forwards}
+.hs{font-size:14px;color:#64748b;margin-top:6px;opacity:0}
+.play .hs{animation:rise .5s ease-out .22s forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes pop{to{opacity:1;transform:none}}
+
+/* mascot */
+.mascot{width:186px;height:204px;margin:6px 0 2px;position:relative;opacity:0;transform:scale(.6)}
+.play .mascot{animation:bounce .6s cubic-bezier(.2,.9,.3,1.4) .1s forwards}
+@keyframes bounce{to{opacity:1;transform:scale(1)}}
+.book.cheer .eyes-round{opacity:0}.book.cheer .eyes-happy{opacity:1}
+.arm-r,.arm-l{transform-box:view-box}
+.arm-r.cheer{transform:rotate(-58deg) translateY(-6px);transform-origin:198px 152px}
+.arm-l.cheer{transform:rotate(58deg) translateY(-6px);transform-origin:62px 152px}
+.book.cheer .sparkles{opacity:0}
+.play .book.cheer .sparkles{animation:spk 1.3s ease-in-out .3s infinite}
+@keyframes spk{0%,100%{opacity:.4;transform:scale(.9)}50%{opacity:1;transform:scale(1.1)}}
+.lid{transform-box:view-box;transform-origin:0 96px;transform:scaleY(0)}
+
+/* mini journey with advancing marker (beat 1) */
+.mini{width:100%;max-width:280px;height:56px;position:relative;margin:6px 0 2px}
+.mini .track{position:absolute;left:8%;right:8%;top:26px;height:8px;border-radius:9px;background:#dbe4ec}
+.mini .fill{position:absolute;left:8%;top:26px;height:8px;border-radius:9px;background:linear-gradient(90deg,#5fd0ec,#28b7d9);width:38%;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.play .mini .fill{width:64%;transition-delay:.2s}
+.mini .dot{position:absolute;top:20px;width:20px;height:20px;border-radius:50%;background:#fff;border:4px solid #cbd5e1}
+.mini .d1{left:6%}.mini .d2{left:47%;border-color:#28b7d9}.mini .d3{left:88%}
+.mini .marker{position:absolute;top:12px;left:38%;width:36px;height:36px;border-radius:50%;background:#28b7d9;border:4px solid #fff;box-shadow:0 6px 16px rgba(40,183,217,.5);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;transition:left .55s cubic-bezier(.4,0,.2,1);transform:translateX(-50%)}
+.play .mini .marker{left:64%;transition-delay:.2s;animation:hop .55s ease-out .2s}
+@keyframes hop{40%{transform:translateX(-50%) translateY(-16px)}}
+
+/* xp float (beat 2) + total (beat 3) */
+.stats2{display:flex;gap:14px;margin-top:10px;width:100%;max-width:300px}
+.scard{flex:1;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:14px 12px;position:relative;overflow:visible}
+.scard .lab{font-size:10.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#94a3b8}
+.scard .val{font-size:26px;font-weight:800;color:#0d2840;margin-top:3px;line-height:1}
+.scard .val small{font-size:14px;color:#64748b;font-weight:700}
+.xpfloat{position:absolute;top:-6px;left:50%;transform:translateX(-50%);font-size:16px;font-weight:800;color:#0e6e8a;background:#e8f8fc;border:1px solid rgba(40,183,217,.3);border-radius:999px;padding:3px 12px;opacity:0}
+.play .xpfloat{animation:xpf 1s cubic-bezier(.2,.8,.3,1) .4s forwards}
+@keyframes xpf{0%{opacity:0;transform:translate(-50%,16px)}25%{opacity:1;transform:translate(-50%,-30px)}80%{opacity:1;transform:translate(-50%,-34px)}100%{opacity:0;transform:translate(-50%,-30px)}}
+.scard.pulse-at{}
+.play .scard.xp{animation:cardpulse .5s ease-out .7s}
+.play .scard.streak{animation:cardpulse .5s ease-out 1s}
+@keyframes cardpulse{40%{transform:scale(1.07);border-color:rgba(40,183,217,.5)}}
+.flame{color:#faa71a;display:inline-block}
+.play .flame{animation:flick .5s ease-out 1s}
+@keyframes flick{0%{transform:scale(.6);opacity:.4}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+
+.cont{margin-top:auto;width:100%;max-width:300px;background:#faa71a;color:#0d2840;font-weight:800;font-size:15px;padding:14px;border-radius:12px;cursor:pointer;opacity:0}
+.play .cont{animation:rise .5s ease-out 1.5s forwards}
+.replay{margin-top:16px;display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#0e6e8a;background:#fff;border:1px solid #e2e8f0;border-radius:999px;padding:9px 16px;cursor:pointer}
+
+/* badge takeover (beat 5 / Tier 3) */
+.takeover{position:absolute;inset:0;background:rgba(13,40,64,.86);backdrop-filter:blur(3px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:0;pointer-events:none;padding:30px}
+.play .takeover{animation:showover .6s ease-out 1.4s forwards}
+@keyframes showover{to{opacity:1}}
+.takeover .medal{transform:scale(.4);opacity:0}
+.play .takeover .medal{animation:medalin .7s cubic-bezier(.2,.9,.3,1.5) 1.5s forwards}
+@keyframes medalin{to{transform:scale(1);opacity:1}}
+.rays{transform-box:fill-box;transform-origin:center}
+.play .takeover .rays{animation:spin 6s linear 1.5s infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.takeover .tlab{font-size:12px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;color:#faa71a;opacity:0}
+.takeover .tname{font-size:24px;font-weight:800;color:#fff;opacity:0}
+.takeover .tdesc{font-size:13.5px;color:rgba(255,255,255,.72);max-width:230px;opacity:0}
+.play .takeover .tlab{animation:rise .5s ease-out 1.9s forwards}
+.play .takeover .tname{animation:pop .5s ease-out 2s forwards}
+.play .takeover .tdesc{animation:rise .5s ease-out 2.15s forwards}
+.takeover .tbtn{margin-top:12px;background:#fff;color:#0d2840;font-weight:800;font-size:14px;padding:12px 26px;border-radius:11px;cursor:pointer;opacity:0}
+.play .takeover .tbtn{animation:rise .5s ease-out 2.3s forwards}
+
+/* choreography strip */
+.strip{margin-top:44px}
+.strip h2{font-size:18px;font-weight:800;color:#0d2840;letter-spacing:-.3px;margin-bottom:4px}
+.strip .ss{color:#64748b;font-size:13px;margin-bottom:22px}
+.beats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.beat{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:16px 12px;text-align:center;position:relative}
+.beat .t{font-size:13px;font-weight:800;color:#28b7d9}
+.beat .tok{font-size:10.5px;font-weight:700;color:#94a3b8;font-family:ui-monospace,monospace;margin-top:2px}
+.beat .ic{height:56px;display:flex;align-items:center;justify-content:center;margin:10px 0 8px}
+.beat .nm{font-size:12.5px;font-weight:700;color:#0d2840}
+.beat .dd{font-size:11px;color:#64748b;margin-top:3px;line-height:1.45}
+.beat .num{font-size:24px;font-weight:800;color:#0d2840}
+.beat .arrow{position:absolute;right:-11px;top:44px;color:#cbd5e1;font-size:16px;z-index:2}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="board">
+  <div class="chip">Module 5 · Screen 3 · Tier 2 → Tier 3</div>
+  <h1>The reward cascade</h1>
+  <div class="sub">What a child sees the moment a class is marked complete. It plays automatically below and loops — tap Replay to watch again.</div>
+  <div class="row">
+    <div class="phone"><div class="fl">Phone · 360px — the moment, centred (same at every width)</div>
+      <div class="frame"><div class="scene" id="scene">
+  <div class="confetti"><i style="left:12%;background:#28b7d9;animation-delay:0s"></i><i style="left:24%;background:#faa71a;animation-delay:0.15s"></i><i style="left:38%;background:#5fd0ec;animation-delay:0.35s"></i><i style="left:52%;background:#e8920a;animation-delay:0.1s"></i><i style="left:64%;background:#28b7d9;animation-delay:0.28s"></i><i style="left:76%;background:#faa71a;animation-delay:0.2s"></i><i style="left:88%;background:#8b5cf6;animation-delay:0.4s"></i><i style="left:18%;background:#faa71a;animation-delay:0.5s"></i><i style="left:70%;background:#28b7d9;animation-delay:0.55s"></i><i style="left:46%;background:#5fd0ec;animation-delay:0.62s"></i></div>
+  <div class="done-lbl">Class complete</div>
+  <div class="h">Wonderful work! ✨</div>
+  <div class="hs">You showed up today, Saafir. That's what counts.</div>
+  <div class="mascot"><div class="book cheer">
+<svg class="book-svg" viewBox="0 0 260 285" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient id="covercs" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#f5eede"/><stop offset=".55" stop-color="#ece0c9"/>
+    <stop offset="1" stop-color="#ddccae"/></linearGradient>
+  <linearGradient id="spinecs" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#9a4327"/><stop offset="1" stop-color="#c1663f"/></linearGradient>
+  <linearGradient id="backcs" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#b7592f"/><stop offset="1" stop-color="#98431f"/></linearGradient>
+  <radialGradient id="iriscs" cx=".38" cy=".33" r=".75">
+    <stop offset="0" stop-color="#4d3826"/><stop offset=".7" stop-color="#392618"/>
+    <stop offset="1" stop-color="#241610"/></radialGradient>
+  <linearGradient id="rimcs" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#7a5238"/><stop offset="1" stop-color="#5b3a25"/></linearGradient>
+  <linearGradient id="limbcs" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#efe6d4"/><stop offset="1" stop-color="#d8c6a7"/></linearGradient>
+  <radialGradient id="glowcs" cx=".5" cy=".35" r=".65">
+    <stop offset="0" stop-color="#ffffff" stop-opacity=".55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+ </defs>
+
+ <!-- ground shadow -->
+ <ellipse class="shadow" cx="130" cy="266" rx="66" ry="13" fill="#43301c" opacity=".16"/>
+
+ <!-- legs -->
+ <g class="legs">
+  <rect x="104" y="212" width="16" height="34" rx="8" fill="url(#limbcs)"/>
+  <rect x="140" y="212" width="16" height="34" rx="8" fill="url(#limbcs)"/>
+  <ellipse cx="110" cy="248" rx="14" ry="9" fill="url(#limbcs)"/>
+  <ellipse cx="150" cy="248" rx="14" ry="9" fill="url(#limbcs)"/>
+ </g>
+
+ <!-- left arm (resting) -->
+ <g class="arm-l cheer">
+  <path d="M64 150 q-20 6 -24 26 q-2 12 8 14 q10 1 12 -12 q2 -16 8 -24 Z" fill="url(#limbcs)"/>
+ </g>
+
+ <!-- BOOK BODY -->
+ <!-- back cover (rust) peeking right + bottom -->
+ <rect x="74" y="48" width="132" height="176" rx="20" fill="url(#backcs)"/>
+ <!-- spine (left) -->
+ <rect x="52" y="52" width="34" height="168" rx="14" fill="url(#spinecs)"/>
+ <!-- top cover flap (raised corner, rust) -->
+ <path d="M60 60 q-6 -18 14 -20 l104 0 q16 2 14 16 l-2 8 q-4 -8 -16 -8 l-96 0 q-16 0 -18 12 Z" fill="#b05a34" opacity=".9"/>
+ <!-- front cover (cream) -->
+ <rect x="60" y="44" width="140" height="178" rx="19" fill="url(#covercs)"/>
+ <!-- page hint under spine -->
+ <rect x="63" y="60" width="4" height="152" rx="2" fill="#e9dcc2"/>
+ <!-- soft top-left sheen on cover -->
+ <ellipse cx="108" cy="86" rx="52" ry="30" fill="url(#glowcs)"/>
+
+ <!-- FACE -->
+ <!-- blush -->
+ <ellipse class="blush" cx="88" cy="158" rx="14" ry="8.5" fill="#ef9a94" opacity=".62"/>
+ <ellipse class="blush" cx="172" cy="158" rx="14" ry="8.5" fill="#ef9a94" opacity=".62"/>
+
+  <!-- glasses temples -->
+ <path d="M70 122 l-14 -3" stroke="url(#rimcs)" stroke-width="6" stroke-linecap="round"/>
+ <path d="M190 122 l14 -3" stroke="url(#rimcs)" stroke-width="6" stroke-linecap="round"/>
+ <!-- bridge -->
+ <path d="M127 121 q3 -6 6 0" stroke="url(#rimcs)" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+ <!-- EYES (round, glossy) -->
+ <g class="eyes-round">
+  <circle cx="100" cy="124" r="27" fill="#fbf7ef"/>
+  <circle cx="160" cy="124" r="27" fill="#fbf7ef"/>
+  <g class="pupils">
+   <circle cx="100" cy="127" r="20" fill="url(#iriscs)"/>
+   <circle cx="160" cy="127" r="20" fill="url(#iriscs)"/>
+   <circle cx="93" cy="119" r="8" fill="#fff"/>
+   <circle cx="153" cy="119" r="8" fill="#fff"/>
+   <circle cx="107" cy="134" r="3.4" fill="#fff" opacity=".85"/>
+   <circle cx="167" cy="134" r="3.4" fill="#fff" opacity=".85"/>
+  </g>
+  <!-- blink lids -->
+  <rect class="lid" x="71" y="94" width="58" height="60" rx="28" fill="url(#covercs)"/>
+  <rect class="lid" x="131" y="94" width="58" height="60" rx="28" fill="url(#covercs)"/>
+ </g>
+ <!-- EYES (happy ^_^) -->
+ <g class="eyes-happy">
+  <path d="M86 129 q14 -20 28 0" stroke="#392618" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M146 129 q14 -20 28 0" stroke="#392618" stroke-width="6" fill="none" stroke-linecap="round"/>
+ </g>
+
+ <!-- glasses rims (drawn over eyes) -->
+ <circle cx="100" cy="124" r="31" fill="none" stroke="url(#rimcs)" stroke-width="7"/>
+ <circle cx="160" cy="124" r="31" fill="none" stroke="url(#rimcs)" stroke-width="7"/>
+ <ellipse cx="90" cy="111" rx="10" ry="6" fill="#fff" opacity=".18"/>
+ <ellipse cx="150" cy="111" rx="10" ry="6" fill="#fff" opacity=".18"/>
+
+ <!-- mouth -->
+ <path class="mouth" d="M120 162 q10 11 20 0" stroke="#7c5334" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+ <!-- right arm (waves / poses) -->
+ <g class="arm-r cheer">
+  <path d="M196 150 q20 6 24 26 q2 12 -8 14 q-10 1 -12 -12 q-2 -16 -8 -24 Z" fill="url(#limbcs)"/>
+ </g>
+
+ <!-- cheer sparkles -->
+ <g class="sparkles">
+  <path d="M40 60 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z" fill="#faa71a"/>
+  <path d="M214 52 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5 Z" fill="#28b7d9"/>
+  <circle cx="52" cy="120" r="3.5" fill="#28b7d9"/>
+  <circle cx="210" cy="110" r="3.5" fill="#faa71a"/>
+ </g>
+</svg></div></div>
+  <div class="mini">
+    <div class="track"></div><div class="fill"></div>
+    <div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div>
+    <div class="marker">3</div>
+  </div>
+  <div class="stats2">
+    <div class="scard xp"><div class="xpfloat">+10 XP</div><div class="lab">Total XP</div><div class="val" id="xpval">1,240</div></div>
+    <div class="scard streak"><div class="lab">Class streak</div><div class="val"><span class="flame">🔥</span> <span id="stval">5</span></div></div>
+  </div>
+  <div class="cont">Continue</div>
+  <div class="takeover">
+    <div class="medal"><svg viewBox="0 0 120 120" width="118" height="118">
+ <g class="rays"><g fill="#faa71a" opacity=".55"><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(0 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(30 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(60 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(90 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(120 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(150 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(180 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(210 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(240 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(270 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(300 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(330 60 60)"/></g></g>
+ <circle cx="60" cy="60" r="40" fill="url(#mg)"/>
+ <circle cx="60" cy="60" r="40" fill="none" stroke="#fff" stroke-width="3" opacity=".6"/>
+ <path d="M60 40 l6 12 13 1 -10 9 3 13 -12 -7 -12 7 3 -13 -10 -9 13 -1 Z" fill="#fff"/>
+ <defs><linearGradient id="mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbbf3e"/><stop offset="1" stop-color="#e8920a"/></linearGradient></defs>
+</svg></div>
+    <div class="tlab">New badge unlocked</div>
+    <div class="tname">Bright Week</div>
+    <div class="tdesc">Seven classes in a row. Steady and shining — just like you.</div>
+    <div class="tbtn">Wear it proudly</div>
+  </div>
+</div></div>
+      <div class="replay" onclick="play()">↻ Replay the cascade</div>
+    </div>
+  </div>
+  <div class="strip">
+  <h2>The choreography — five beats, never all at once</h2>
+  <div class="ss">Each beat lands separately. The staggering <i>is</i> the reward — dump it in one frame and it reads like a notification. Timings are design tokens (<code>--beat-1…5</code>), not per-component guesses.</div>
+  <div class="beats">
+    <div class="beat"><div class="t">0.2s</div><div class="tok">--beat-1</div><div class="ic"><svg width="70" height="30"><line x1="6" y1="15" x2="64" y2="15" stroke="#dbe4ec" stroke-width="6" stroke-linecap="round"/><line x1="6" y1="15" x2="42" y2="15" stroke="#28b7d9" stroke-width="6" stroke-linecap="round"/><circle cx="46" cy="15" r="9" fill="#28b7d9" stroke="#fff" stroke-width="3"/></svg></div><div class="nm">Marker advances</div><div class="dd">One step along the journey path.</div><div class="arrow">→</div></div>
+    <div class="beat"><div class="t">0.4s</div><div class="tok">--beat-2</div><div class="ic"><div style="font-size:17px;font-weight:800;color:#0e6e8a;background:#e8f8fc;border:1px solid rgba(40,183,217,.3);border-radius:999px;padding:4px 12px">+10 XP</div></div><div class="nm">+10 XP floats up</div><div class="dd">Rises and lands in the total.</div><div class="arrow">→</div></div>
+    <div class="beat"><div class="t">0.7s</div><div class="tok">--beat-3</div><div class="ic"><div class="num">1,250</div></div><div class="nm">Total counts up</div><div class="dd">Digit by digit, not a jump.</div><div class="arrow">→</div></div>
+    <div class="beat"><div class="t">1.0s</div><div class="tok">--beat-4</div><div class="ic"><div class="num">🔥 6</div></div><div class="nm">Streak reignites</div><div class="dd">Flame flares, count ticks over.</div><div class="arrow">→</div></div>
+    <div class="beat"><div class="t">1.4s</div><div class="tok">--beat-5</div><div class="ic"><div style="transform:scale(.5)"><svg viewBox="0 0 120 120" width="118" height="118">
+ <g class="rays"><g fill="#faa71a" opacity=".55"><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(0 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(30 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(60 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(90 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(120 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(150 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(180 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(210 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(240 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(270 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(300 60 60)"/><rect x="58" y="2" width="4" height="16" rx="2" transform="rotate(330 60 60)"/></g></g>
+ <circle cx="60" cy="60" r="40" fill="url(#mg)"/>
+ <circle cx="60" cy="60" r="40" fill="none" stroke="#fff" stroke-width="3" opacity=".6"/>
+ <path d="M60 40 l6 12 13 1 -10 9 3 13 -12 -7 -12 7 3 -13 -10 -9 13 -1 Z" fill="#fff"/>
+ <defs><linearGradient id="mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbbf3e"/><stop offset="1" stop-color="#e8920a"/></linearGradient></defs>
+</svg></div></div><div class="nm">Badge takeover</div><div class="dd">Tier 3 — only if one was earned.</div></div>
+  </div>
+</div>
+</div>
+<script>
+const scene=document.getElementById('scene');
+let tXP, tStreak;
+function count(el,from,to,ms,delay,suffix){
+  clearTimeout(el._t);
+  el._t=setTimeout(()=>{
+    const t0=performance.now();
+    function step(now){const p=Math.min(1,(now-t0)/ms);
+      el.firstChild.nodeValue=Math.round(from+(to-from)*(p<1?1-Math.pow(1-p,3):1)).toLocaleString();
+      if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+  },delay);
+}
+function play(){
+  scene.classList.remove('play'); void scene.offsetWidth; scene.classList.add('play');
+  const xp=document.getElementById('xpval'); xp.firstChild.nodeValue='1,240';
+  const st=document.getElementById('stval'); st.firstChild.nodeValue='5';
+  count(xp,1240,1250,600,700);
+  count(st,5,6,300,1000);
+}
+window.play=play;
+window.showFinal=function(){play();};
+document.addEventListener('DOMContentLoaded',()=>{ setTimeout(play,400); setInterval(play,6500); });
+</script></body></html>

@@ -1,0 +1,578 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Journey Map — Quran Odyssey Module 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#e9eef3;color:#0f172a;-webkit-font-smoothing:antialiased;padding:48px 0 80px}
+.board{max-width:1520px;margin:0 auto;padding:0 24px}
+.board-title{text-align:center;margin-bottom:8px;font-size:22px;font-weight:800;letter-spacing:-.5px;color:#0d2840}
+.board-sub{text-align:center;color:#64748b;font-size:14px;margin-bottom:44px}
+.frame-wrap{margin:0 auto 56px;display:flex;flex-direction:column;align-items:center}
+.frame-label{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#94a3b8;margin-bottom:12px}
+.frame-label b{color:#0d2840;font-weight:800}
+.frame{background:#fff;border:1px solid #d5dde5;border-radius:22px;overflow:hidden;box-shadow:0 24px 60px rgba(13,40,64,.10)}
+.f-phone{width:360px}.f-tablet{width:768px}.f-desktop{width:1440px}
+.shell{display:flex}
+.home{position:relative;flex:1;min-width:0;background:radial-gradient(120% 60% at 90% -8%,rgba(40,183,217,.10),transparent 55%),radial-gradient(120% 60% at 0% 108%,rgba(250,167,26,.09),transparent 55%),#f7f9fb;padding:20px 20px 24px}
+/* header */
+.hd{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.hd-l{display:flex;align-items:center;gap:12px}
+.hd-ava{width:46px;height:46px;border-radius:50%;overflow:hidden;background:#e8f8fc;border:2px solid #cdeaf3;display:flex;align-items:flex-end;justify-content:center}
+.hi{font-size:12px;color:#64748b;font-weight:600}.hn{font-size:19px;font-weight:800;letter-spacing:-.3px;color:#0d2840}
+.sound{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:#0e6e8a;background:#e8f8fc;border:1px solid rgba(40,183,217,.25);border-radius:999px;padding:7px 12px;cursor:pointer}
+/* stats */
+.stats{display:flex;gap:10px;margin-top:16px}
+.stat{flex:1;display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:11px 13px}
+.stat .si{color:#28b7d9;flex-shrink:0}.stat .sv{font-size:17px;font-weight:800;color:#0d2840;line-height:1}.stat .sl{font-size:11px;color:#64748b;margin-top:2px}
+/* chip */
+.chip{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.66px;text-transform:uppercase;color:#0e6e8a;background:#e8f8fc;border:1px solid rgba(40,183,217,.25);border-radius:999px;padding:5px 13px}
+.chip .dot{width:6px;height:6px;border-radius:50%;background:#28b7d9}
+.jtitle{display:flex;align-items:center;justify-content:space-between;margin:20px 0 4px}
+.jtitle h2{font-size:20px;font-weight:800;letter-spacing:-.4px;color:#0d2840}
+/* journey svg */
+.jwrap{width:100%}
+.jsvg{display:block}
+.jsvg text{font-family:'Plus Jakarta Sans',sans-serif}
+.nlabel{font-size:12.5px;font-weight:700}
+.done-l{fill:#0f172a}.cur-l{fill:#0e6e8a;font-weight:800}.lock-l{fill:#94a3b8}
+.pulse{animation:pl 2.4s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pl{0%{transform:scale(.7);opacity:.5}70%{transform:scale(1.5);opacity:0}100%{opacity:0}}
+.jmascot{animation:fl 4s ease-in-out infinite}
+.jmascot .sparkles{display:none}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.jmascot .arm-r.point{transform:rotate(-44deg) translate(4px,-6px);transform-box:view-box;transform-origin:198px 152px}
+.jmascot .lid{transform:scaleY(0)}
+/* next card */
+.nextc{background:#0d2840;border-radius:18px;padding:18px 20px;margin-top:8px;color:#fff;position:relative;overflow:hidden}
+.nextc::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(40,183,217,.12);top:-120px;right:-40px}
+.nx-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;position:relative}
+.nx-lbl{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#28b7d9}
+.nx-name{font-size:19px;font-weight:800;margin-top:3px}
+.nx-away{font-size:12.5px;color:rgba(255,255,255,.7);text-align:right}.nx-away b{color:#faa71a;font-size:15px}
+.bar{height:9px;background:rgba(255,255,255,.14);border-radius:999px;margin:14px 0 16px;overflow:hidden;position:relative}
+.bar span{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#5fd0ec,#28b7d9);border-radius:999px}
+.cta{display:block;text-align:center;background:#faa71a;color:#0d2840;font-weight:800;font-size:14.5px;padding:13px;border-radius:11px;cursor:pointer;position:relative}
+/* bottom tab (phone) */
+.tabbar{display:flex;justify-content:space-around;align-items:center;background:#fff;border-top:1px solid #e2e8f0;padding:10px 8px 12px}
+.tab{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10.5px;font-weight:700;color:#94a3b8}
+.tab.on{color:#28b7d9}
+.tab .ni{color:inherit}
+/* rail (tablet) */
+.rail{width:72px;flex-shrink:0;background:#fff;border-right:1px solid #e2e8f0;display:flex;flex-direction:column;align-items:center;padding:18px 0;gap:8px}
+.rail .mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#28b7d9,#0e6e8a);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.rail .ri{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;color:#94a3b8}
+.rail .ri.on{background:#e8f8fc;color:#28b7d9}
+/* sidebar (desktop) */
+.side{width:248px;flex-shrink:0;background:#fff;border-right:1px solid #e2e8f0;padding:22px 16px;display:flex;flex-direction:column}
+.side .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:#0d2840;font-size:16px;padding:0 8px 20px}
+.side .brand .mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#28b7d9,#0e6e8a);display:flex;align-items:center;justify-content:center}
+.side .nav{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+.navi{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:11px;font-size:14px;font-weight:600;color:#64748b;cursor:pointer}
+.navi.on{background:#e8f8fc;color:#0e6e8a;font-weight:700}
+.navi .ni{color:inherit}
+.side .who{margin-top:auto;display:flex;align-items:center;gap:11px;padding:10px;border:1px solid #e2e8f0;border-radius:14px}
+.side .who .a{width:40px;height:40px;border-radius:50%;overflow:hidden;background:#e8f8fc;border:2px solid #cdeaf3;display:flex;align-items:flex-end;justify-content:center}
+.side .who .n{font-size:14px;font-weight:800;color:#0d2840}.side .who .s{font-size:11.5px;color:#0e6e8a;font-weight:600}
+/* desktop main layout */
+.d-main{padding:26px 34px 30px}
+.d-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.d-stats{display:flex;gap:12px}
+.d-stats .stat{min-width:130px}
+.d-grid{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start;margin-top:14px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body><div class="board">
+<div class="board-title">Module 5 · Screen 2 — The Journey Map (child home)</div>
+<div class="board-sub">Quran Odyssey is named after a journey. The marker moves every session; stages are landmarks; the Book points the way. Fast feedback (the path) + slow prestige (the stages). Three real layouts — vertical climb on phone, serpentine on tablet, horizontal sweep on desktop.</div>
+<div class="frame-wrap"><div class="frame-label">Phone · <b>360px</b></div><div class="frame f-phone"><div class="shell"><div class="home">
+      <div class="hd">
+      <div class="hd-l"><div class="hd-ava"><svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="baSaafir" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs>
+ <path d="M16 98 C16 71 33 61 50 61 C67 61 84 71 84 98 Z" fill="url(#baSaafir)"/><circle cx="50" cy="46" r="17" fill="#f6efe2"/>
+ <path d="M32 45 C32 26 39 21 50 21 C61 21 68 26 68 45 C59 40 41 40 32 45 Z" fill="#0d2840"/></svg></div>
+        <div><div class="hi">Assalāmu ʿalaykum,</div><div class="hn">Saafir</div></div></div>
+      <button class="sound"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 9a4 4 0 0 1 0 6"/></svg> Sounds on</button></div><div class="stats"><div class="stat"><svg class="si" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M12 3c2 4 5 5 5 9a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-8z"/></svg><div><div class="sv">5</div><div class="sl">class streak</div></div></div><div class="stat"><svg class="si" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M20 6 9 17l-5-5"/></svg><div><div class="sv">38</div><div class="sl">sessions</div></div></div><div class="stat"><svg class="si" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polygon points="12 3 14.5 8.5 20.5 9.3 16 13.5 17.2 19.5 12 16.5 6.8 19.5 8 13.5 3.5 9.3 9.5 8.5"/></svg><div><div class="sv">5</div><div class="sl">badges</div></div></div></div>
+      <div class="jtitle"><h2>Your journey</h2><div class="chip"><span class="dot"></span>Stage 3</div></div>
+      <div class="jwrap"><svg viewBox="0 0 360 690" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" class="jsvg">
+     <defs>
+      <linearGradient id="pathg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#5fd0ec"/><stop offset="1" stop-color="#28b7d9"/></linearGradient>
+     </defs>
+     <path d="M 112.0 610.0 C 135.0 596.7 250.0 556.3 250.0 530.0 C 250.0 503.7 112.0 478.3 112.0 452.0 C 112.0 425.7 250.0 398.0 250.0 372.0 C 250.0 346.0 112.0 322.3 112.0 296.0 C 112.0 269.7 250.0 240.3 250.0 214.0 C 250.0 187.7 112.0 162.0 112.0 138.0 C 112.0 114.0 227.0 81.3 250.0 70.0 " fill="none" stroke="#dbe4ec" stroke-width="14" stroke-linecap="round" stroke-dasharray="2 22"/>
+     <path d="M 112.0 610.0 C 135.0 596.7 250.0 556.3 250.0 530.0 C 250.0 503.7 135.0 465.0 112.0 452.0 " fill="none" stroke="url(#pathg)" stroke-width="14" stroke-linecap="round"/>
+    <g class="node done">
+          <circle cx="112" cy="610" r="26" fill="#94a3b8"/>
+          <circle cx="112" cy="610" r="26" fill="none" stroke="#fff" stroke-width="3" opacity=".55"/>
+          <path d="M102 610 l7 8 13 -15" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="112" y="656" text-anchor="middle" class="nlabel done-l">Mubtadiʼ</text></g><g class="node done">
+          <circle cx="250" cy="530" r="26" fill="#5fd0ec"/>
+          <circle cx="250" cy="530" r="26" fill="none" stroke="#fff" stroke-width="3" opacity=".55"/>
+          <path d="M240 530 l7 8 13 -15" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="250" y="576" text-anchor="middle" class="nlabel done-l">Mutaʼallim</text></g><g class="node current">
+          <circle class="pulse" cx="112" cy="452" r="34" fill="#28b7d9" opacity=".18"/>
+          <circle cx="112" cy="452" r="30" fill="#fff" stroke="#28b7d9" stroke-width="5"/>
+          <circle cx="112" cy="452" r="17" fill="#28b7d9"/>
+          <text x="112" y="457" text-anchor="middle" fill="#fff" font-weight="800" font-size="17">3</text>
+          <g class="youare"><rect x="64" y="380" width="96" height="25" rx="12.5" fill="#0d2840"/>
+          <text x="112" y="397" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="800" letter-spacing=".3">YOU'RE HERE</text>
+          <path d="M106 405 l6 7 6 -7 Z" fill="#0d2840"/></g>
+          <text x="112" y="504" text-anchor="middle" class="nlabel cur-l">Muthābir</text></g><g class="node locked">
+      <circle cx="250" cy="372" r="22" fill="#e2e8f0"/>
+      <path d="M243 371 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="#94a3b8" stroke-width="2.6"/>
+      <rect x="241" y="371" width="18" height="14" rx="3.5" fill="#94a3b8"/>
+      <text x="250" y="412" text-anchor="middle" class="nlabel lock-l">Mutawassit</text></g><g class="node locked">
+      <circle cx="112" cy="296" r="22" fill="#e2e8f0"/>
+      <path d="M105 295 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="#94a3b8" stroke-width="2.6"/>
+      <rect x="103" y="295" width="18" height="14" rx="3.5" fill="#94a3b8"/>
+      <text x="112" y="336" text-anchor="middle" class="nlabel lock-l">Mujtahid</text></g><g class="node locked">
+      <circle cx="250" cy="214" r="22" fill="#e2e8f0"/>
+      <path d="M243 213 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="#94a3b8" stroke-width="2.6"/>
+      <rect x="241" y="213" width="18" height="14" rx="3.5" fill="#94a3b8"/>
+      <text x="250" y="254" text-anchor="middle" class="nlabel lock-l">Mutaqaddim</text></g><g class="node locked">
+      <circle cx="112" cy="138" r="22" fill="#e2e8f0"/>
+      <path d="M105 137 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="#94a3b8" stroke-width="2.6"/>
+      <rect x="103" y="137" width="18" height="14" rx="3.5" fill="#94a3b8"/>
+      <text x="112" y="178" text-anchor="middle" class="nlabel lock-l">Mutqin</text></g><g class="node locked">
+      <circle cx="250" cy="70" r="22" fill="#e2e8f0"/>
+      <path d="M243 69 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="#94a3b8" stroke-width="2.6"/>
+      <rect x="241" y="69" width="18" height="14" rx="3.5" fill="#94a3b8"/>
+      <text x="250" y="110" text-anchor="middle" class="nlabel lock-l">Ḥāfiẓ</text></g><g class="jmascot" transform="translate(158,404) scale(0.3)">
+<svg class="book-svg" viewBox="0 0 260 285" width="260" height="285" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient id="coverjm" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#f5eede"/><stop offset=".55" stop-color="#ece0c9"/>
+    <stop offset="1" stop-color="#ddccae"/></linearGradient>
+  <linearGradient id="spinejm" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#9a4327"/><stop offset="1" stop-color="#c1663f"/></linearGradient>
+  <linearGradient id="backjm" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#b7592f"/><stop offset="1" stop-color="#98431f"/></linearGradient>
+  <radialGradient id="irisjm" cx=".38" cy=".33" r=".75">
+    <stop offset="0" stop-color="#4d3826"/><stop offset=".7" stop-color="#392618"/>
+    <stop offset="1" stop-color="#241610"/></radialGradient>
+  <linearGradient id="rimjm" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#7a5238"/><stop offset="1" stop-color="#5b3a25"/></linearGradient>
+  <linearGradient id="limbjm" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#efe6d4"/><stop offset="1" stop-color="#d8c6a7"/></linearGradient>
+  <radialGradient id="glowjm" cx=".5" cy=".35" r=".65">
+    <stop offset="0" stop-color="#ffffff" stop-opacity=".55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+ </defs>
+
+ <!-- ground shadow -->
+ <ellipse class="shadow" cx="130" cy="266" rx="66" ry="13" fill="#43301c" opacity=".16"/>
+
+ <!-- legs -->
+ <g class="legs">
+  <rect x="104" y="212" width="16" height="34" rx="8" fill="url(#limbjm)"/>
+  <rect x="140" y="212" width="16" height="34" rx="8" fill="url(#limbjm)"/>
+  <ellipse cx="110" cy="248" rx="14" ry="9" fill="url(#limbjm)"/>
+  <ellipse cx="150" cy="248" rx="14" ry="9" fill="url(#limbjm)"/>
+ </g>
+
+ <!-- left arm (resting) -->
+ <g class="arm-l ">
+  <path d="M64 150 q-20 6 -24 26 q-2 12 8 14 q10 1 12 -12 q2 -16 8 -24 Z" fill="url(#limbjm)"/>
+ </g>
+
+ <!-- BOOK BODY -->
+ <!-- back cover (rust) peeking right + bottom -->
+ <rect x="74" y="48" width="132" height="176" rx="20" fill="url(#backjm)"/>
+ <!-- spine (left) -->
+ <rect x="52" y="52" width="34" height="168" rx="14" fill="url(#spinejm)"/>
+ <!-- top cover flap (raised corner, rust) -->
+ <path d="M60 60 q-6 -18 14 -20 l104 0 q16 2 14 16 l-2 8 q-4 -8 -16 -8 l-96 0 q-16 0 -18 12 Z" fill="#b05a34" opacity=".9"/>
+ <!-- front cover (cream) -->
+ <rect x="60" y="44" width="140" height="178" rx="19" fill="url(#coverjm)"/>
+ <!-- page hint under spine -->
+ <rect x="63" y="60" width="4" height="152" rx="2" fill="#e9dcc2"/>
+ <!-- soft top-left sheen on cover -->
+ <ellipse cx="108" cy="86" rx="52" ry="30" fill="url(#glowjm)"/>
+
+ <!-- FACE -->
+ <!-- blush -->
+ <ellipse class="blush" cx="88" cy="158" rx="14" ry="8.5" fill="#ef9a94" opacity=".62"/>
+ <ellipse class="blush" cx="172" cy="158" rx="14" ry="8.5" fill="#ef9a94" opacity=".62"/>
+
+  <!-- glasses temples -->
+ <path d="M70 122 l-14 -3" stroke="url(#rimjm)" stroke-width="6" stroke-linecap="round"/>
+ <path d="M190 122 l14 -3" stroke="url(#rimjm)" stroke-width="6" stroke-linecap="round"/>
+ <!-- bridge -->
+ <path d="M127 121 q3 -6 6 0" stroke="url(#rimjm)" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+ <!-- EYES (round, glossy) -->
+ <g class="eyes-round">
+  <circle cx="100" cy="124" r="27" fill="#fbf7ef"/>
+  <circle cx="160" cy="124" r="27" fill="#fbf7ef"/>
+  <g class="pupils">
+   <circle cx="100" cy="127" r="20" fill="url(#irisjm)"/>
+   <circle cx="160" cy="127" r="20" fill="url(#irisjm)"/>
+   <circle cx="93" cy="119" r="8" fill="#fff"/>
+   <circle cx="153" cy="119" r="8" fill="#fff"/>
+   <circle cx="107" cy="134" r="3.4" fill="#fff" opacity=".85"/>
+   <circle cx="167" cy="134" r="3.4" fill="#fff" opacity=".85"/>
+  </g>
+  <!-- blink lids -->
+  <rect class="lid" x="71" y="94" width="58" height="60" rx="28" fill="url(#coverjm)"/>
+  <rect class="lid" x="131" y="94" width="58" height="60" rx="28" fill="url(#coverjm)"/>
+ </g>
+ <!-- EYES (happy ^_^) -->
+ <g class="eyes-happy">
+  <path d="M86 129 q14 -20 28 0" stroke="#392618" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M146 129 q14 -20 28 0" stroke="#392618" stroke-width="6" fill="none" stroke-linecap="round"/>
+ </g>
+
+ <!-- glasses rims (drawn over eyes) -->
+ <circle cx="100" cy="124" r="31" fill="none" stroke="url(#rimjm)" stroke-width="7"/>
+ <circle cx="160" cy="124" r="31" fill="none" stroke="url(#rimjm)" stroke-width="7"/>
+ <ellipse cx="90" cy="111" rx="10" ry="6" fill="#fff" opacity=".18"/>
+ <ellipse cx="150" cy="111" rx="10" ry="6" fill="#fff" opacity=".18"/>
+
+ <!-- mouth -->
+ <path class="mouth" d="M120 162 q10 11 20 0" stroke="#7c5334" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+ <!-- right arm (waves / poses) -->
+ <g class="arm-r ">
+  <path d="M196 150 q20 6 24 26 q2 12 -8 14 q-10 1 -12 -12 q-2 -16 -8 -24 Z" fill="url(#limbjm)"/>
+ </g>
+
+ <!-- cheer sparkles -->
+ <g class="sparkles">
+  <path d="M40 60 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z" fill="#faa71a"/>
+  <path d="M214 52 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5 Z" fill="#28b7d9"/>
+  <circle cx="52" cy="120" r="3.5" fill="#28b7d9"/>
+  <circle cx="210" cy="110" r="3.5" fill="#faa71a"/>
+ </g>
+</svg></g></svg></div>
+      <div class="nextc">
+      <div class="nx-top"><div><div class="nx-lbl">Next stop</div><div class="nx-name">Stage 4 · Mutawassit</div></div>
+        <div class="nx-away">about <b>4</b> classes away</div></div>
+      <div class="bar"><span style="width:60%"></span></div>
+      <a class="cta">Continue your journey</a></div>
+    </div></div><div class="tabbar"><div class="tab on"><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg><span>Home</span></div><div class="tab "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M9 5 3 7v12l6-2 6 2 6-2V5l-6 2-6-2z"/><path d="M9 5v12M15 7v12"/></svg><span>Journey</span></div><div class="tab "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><polygon points="12 3 14.5 8.5 20.5 9.3 16 13.5 17.2 19.5 12 16.5 6.8 19.5 8 13.5 3.5 9.3 9.5 8.5"/></svg><span>Rewards</span></div><div class="tab "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="12" cy="8" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/></svg><span>Profile</span></div></div></div></div>
+<div class="frame-wrap"><div class="frame-label">Tablet · <b>768px</b></div><div class="frame f-tablet"><div class="shell">
+      <div class="rail"><div class="mark"><svg class="" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z"/></svg></div><div class="ri on"><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></div><div class="ri "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M9 5 3 7v12l6-2 6 2 6-2V5l-6 2-6-2z"/><path d="M9 5v12M15 7v12"/></svg></div><div class="ri "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><polygon points="12 3 14.5 8.5 20.5 9.3 16 13.5 17.2 19.5 12 16.5 6.8 19.5 8 13.5 3.5 9.3 9.5 8.5"/></svg></div><div class="ri "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z"/></svg></div><div class="ri "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="12" cy="8" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></div></div>
+      <div class="home"><div class="hd">
+      <div class="hd-l"><div class="hd-ava"><svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="baSaafir" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs>
+ <path d="M16 98 C16 71 33 61 50 61 C67 61 84 71 84 98 Z" fill="url(#baSaafir)"/><circle cx="50" cy="46" r="17" fill="#f6efe2"/>
+ <path d="M32 45 C32 26 39 21 50 21 C61 21 68 26 68 45 C59 40 41 40 32 45 Z" fill="#0d2840"/></svg></div>
+        <div><div class="hi">Assalāmu ʿalaykum,</div><div class="hn">Saafir</div></div></div>
+      <button class="sound"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 9a4 4 0 0 1 0 6"/></svg> Sounds on</button></div><div class="stats"><div class="stat"><svg class="si" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M12 3c2 4 5 5 5 9a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-8z"/></svg><div><div class="sv">5</div><div class="sl">class streak</div></div></div><div class="stat"><svg class="si" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M20 6 9 17l-5-5"/></svg><div><div class="sv">38</div><div class="sl">sessions</div></div></div><div class="stat"><svg class="si" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polygon points="12 3 14.5 8.5 20.5 9.3 16 13.5 17.2 19.5 12 16.5 6.8 19.5 8 13.5 3.5 9.3 9.5 8.5"/></svg><div><div class="sv">5</div><div class="sl">badges</div></div></div></div>
+        <div class="jtitle"><h2>Your journey</h2><div class="chip"><span class="dot"></span>Stage 3 · Muthābir</div></div>
+        <div class="jwrap"><svg viewBox="0 0 680 640" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" class="jsvg">
+     <defs>
+      <linearGradient id="pathg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#5fd0ec"/><stop offset="1" stop-color="#28b7d9"/></linearGradient>
+     </defs>
+     <path d="M 180.0 560.0 C 228.3 547.7 470.0 511.0 470.0 486.0 C 470.0 461.0 180.0 435.0 180.0 410.0 C 180.0 385.0 470.0 361.3 470.0 336.0 C 470.0 310.7 180.0 283.7 180.0 258.0 C 180.0 232.3 470.0 205.0 470.0 182.0 C 470.0 159.0 180.0 139.3 180.0 120.0 C 180.0 100.7 421.7 75.0 470.0 66.0 " fill="none" stroke="#dbe4ec" stroke-width="14" stroke-linecap="round" stroke-dasharray="2 22"/>
+     <path d="M 180.0 560.0 C 228.3 547.7 470.0 511.0 470.0 486.0 C 470.0 461.0 228.3 422.7 180.0 410.0 " fill="none" stroke="url(#pathg)" stroke-width="14" stroke-linecap="round"/>
+    <g class="node done">
+          <circle cx="180" cy="560" r="26" fill="#94a3b8"/>
+          <circle cx="180" cy="560" r="26" fill="none" stroke="#fff" stroke-width="3" opacity=".55"/>
+          <path d="M170 560 l7 8 13 -15" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="180" y="606" text-anchor="middle" class="nlabel done-l">Mubtadiʼ</text></g><g class="node done">
+          <circle cx="470" cy="486" r="26" fill="#5fd0ec"/>
+          <circle cx="470" cy="486" r="26" fill="none" stroke="#fff" stroke-width="3" opacity=".55"/>
+          <path d="M460 486 l7 8 13 -15" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="470" y="532" text-anchor="middle" class="nlabel done-l">Mutaʼallim</text></g><g class="node current">
+          <circle class="pulse" cx="180" cy="410" r="34" fill="#28b7d9" opacity=".18"/>
+          <circle cx="180" cy="410" r="30" fill="#fff" stroke="#28b7d9" stroke-width="5"/>
+          <circle cx="180" cy="410" r="17" fill="#28b7d9"/>
+          <text x="180" y="415" text-anchor="middle" fill="#fff" font-weight="800" font-size="17">3</text>
+          <g class="youare"><rect x="132" y="338" width="96" height="25" rx="12.5" fill="#0d2840"/>
+          <text x="180" y="355" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="800" letter-spacing=".3">YOU'RE HERE</text>
+          <path d="M174 363 l6 7 6 -7 Z" fill="#0d2840"/></g>
+          <text x="180" y="462" text-anchor="middle" class="nlabel cur-l">Muthābir</text></g><g class="node locked">
+      <circle cx="470" cy="336" r="22" fill="#e2e8f0"/>
+      <path d="M463 335 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="#94a3b8" stroke-width="2.6"/>
+      <rect x="461" y="335" width="18" height="14" rx="3.5" fill="#94a3b8"/>
+      <text x="470" y="376" text-anchor="middle" class="nlabel lock-l">Mutawassit</text></g><g class="node locked">
+      <circle cx="180" cy="258" r="22" fill="#e2e8f0"/>
+      <path d="M173 257 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="#94a3b8" stroke-width="2.6"/>
+      <rect x="171" y="257" width="18" height="14" rx="3.5" fill="#94a3b8"/>
+      <text x="180" y="298" text-anchor="middle" class="nlabel lock-l">Mujtahid</text></g><g class="node locked">
+      <circle cx="470" cy="182" r="22" fill="#e2e8f0"/>
+      <path d="M463 181 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="#94a3b8" stroke-width="2.6"/>
+      <rect x="461" y="181" width="18" height="14" rx="3.5" fill="#94a3b8"/>
+      <text x="470" y="222" text-anchor="middle" class="nlabel lock-l">Mutaqaddim</text></g><g class="node locked">
+      <circle cx="180" cy="120" r="22" fill="#e2e8f0"/>
+      <path d="M173 119 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="#94a3b8" stroke-width="2.6"/>
+      <rect x="171" y="119" width="18" height="14" rx="3.5" fill="#94a3b8"/>
+      <text x="180" y="160" text-anchor="middle" class="nlabel lock-l">Mutqin</text></g><g class="node locked">
+      <circle cx="470" cy="66" r="22" fill="#e2e8f0"/>
+      <path d="M463 65 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="#94a3b8" stroke-width="2.6"/>
+      <rect x="461" y="65" width="18" height="14" rx="3.5" fill="#94a3b8"/>
+      <text x="470" y="106" text-anchor="middle" class="nlabel lock-l">Ḥāfiẓ</text></g><g class="jmascot" transform="translate(252,366) scale(0.3)">
+<svg class="book-svg" viewBox="0 0 260 285" width="260" height="285" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient id="coverjm" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#f5eede"/><stop offset=".55" stop-color="#ece0c9"/>
+    <stop offset="1" stop-color="#ddccae"/></linearGradient>
+  <linearGradient id="spinejm" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#9a4327"/><stop offset="1" stop-color="#c1663f"/></linearGradient>
+  <linearGradient id="backjm" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#b7592f"/><stop offset="1" stop-color="#98431f"/></linearGradient>
+  <radialGradient id="irisjm" cx=".38" cy=".33" r=".75">
+    <stop offset="0" stop-color="#4d3826"/><stop offset=".7" stop-color="#392618"/>
+    <stop offset="1" stop-color="#241610"/></radialGradient>
+  <linearGradient id="rimjm" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#7a5238"/><stop offset="1" stop-color="#5b3a25"/></linearGradient>
+  <linearGradient id="limbjm" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#efe6d4"/><stop offset="1" stop-color="#d8c6a7"/></linearGradient>
+  <radialGradient id="glowjm" cx=".5" cy=".35" r=".65">
+    <stop offset="0" stop-color="#ffffff" stop-opacity=".55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+ </defs>
+
+ <!-- ground shadow -->
+ <ellipse class="shadow" cx="130" cy="266" rx="66" ry="13" fill="#43301c" opacity=".16"/>
+
+ <!-- legs -->
+ <g class="legs">
+  <rect x="104" y="212" width="16" height="34" rx="8" fill="url(#limbjm)"/>
+  <rect x="140" y="212" width="16" height="34" rx="8" fill="url(#limbjm)"/>
+  <ellipse cx="110" cy="248" rx="14" ry="9" fill="url(#limbjm)"/>
+  <ellipse cx="150" cy="248" rx="14" ry="9" fill="url(#limbjm)"/>
+ </g>
+
+ <!-- left arm (resting) -->
+ <g class="arm-l ">
+  <path d="M64 150 q-20 6 -24 26 q-2 12 8 14 q10 1 12 -12 q2 -16 8 -24 Z" fill="url(#limbjm)"/>
+ </g>
+
+ <!-- BOOK BODY -->
+ <!-- back cover (rust) peeking right + bottom -->
+ <rect x="74" y="48" width="132" height="176" rx="20" fill="url(#backjm)"/>
+ <!-- spine (left) -->
+ <rect x="52" y="52" width="34" height="168" rx="14" fill="url(#spinejm)"/>
+ <!-- top cover flap (raised corner, rust) -->
+ <path d="M60 60 q-6 -18 14 -20 l104 0 q16 2 14 16 l-2 8 q-4 -8 -16 -8 l-96 0 q-16 0 -18 12 Z" fill="#b05a34" opacity=".9"/>
+ <!-- front cover (cream) -->
+ <rect x="60" y="44" width="140" height="178" rx="19" fill="url(#coverjm)"/>
+ <!-- page hint under spine -->
+ <rect x="63" y="60" width="4" height="152" rx="2" fill="#e9dcc2"/>
+ <!-- soft top-left sheen on cover -->
+ <ellipse cx="108" cy="86" rx="52" ry="30" fill="url(#glowjm)"/>
+
+ <!-- FACE -->
+ <!-- blush -->
+ <ellipse class="blush" cx="88" cy="158" rx="14" ry="8.5" fill="#ef9a94" opacity=".62"/>
+ <ellipse class="blush" cx="172" cy="158" rx="14" ry="8.5" fill="#ef9a94" opacity=".62"/>
+
+  <!-- glasses temples -->
+ <path d="M70 122 l-14 -3" stroke="url(#rimjm)" stroke-width="6" stroke-linecap="round"/>
+ <path d="M190 122 l14 -3" stroke="url(#rimjm)" stroke-width="6" stroke-linecap="round"/>
+ <!-- bridge -->
+ <path d="M127 121 q3 -6 6 0" stroke="url(#rimjm)" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+ <!-- EYES (round, glossy) -->
+ <g class="eyes-round">
+  <circle cx="100" cy="124" r="27" fill="#fbf7ef"/>
+  <circle cx="160" cy="124" r="27" fill="#fbf7ef"/>
+  <g class="pupils">
+   <circle cx="100" cy="127" r="20" fill="url(#irisjm)"/>
+   <circle cx="160" cy="127" r="20" fill="url(#irisjm)"/>
+   <circle cx="93" cy="119" r="8" fill="#fff"/>
+   <circle cx="153" cy="119" r="8" fill="#fff"/>
+   <circle cx="107" cy="134" r="3.4" fill="#fff" opacity=".85"/>
+   <circle cx="167" cy="134" r="3.4" fill="#fff" opacity=".85"/>
+  </g>
+  <!-- blink lids -->
+  <rect class="lid" x="71" y="94" width="58" height="60" rx="28" fill="url(#coverjm)"/>
+  <rect class="lid" x="131" y="94" width="58" height="60" rx="28" fill="url(#coverjm)"/>
+ </g>
+ <!-- EYES (happy ^_^) -->
+ <g class="eyes-happy">
+  <path d="M86 129 q14 -20 28 0" stroke="#392618" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M146 129 q14 -20 28 0" stroke="#392618" stroke-width="6" fill="none" stroke-linecap="round"/>
+ </g>
+
+ <!-- glasses rims (drawn over eyes) -->
+ <circle cx="100" cy="124" r="31" fill="none" stroke="url(#rimjm)" stroke-width="7"/>
+ <circle cx="160" cy="124" r="31" fill="none" stroke="url(#rimjm)" stroke-width="7"/>
+ <ellipse cx="90" cy="111" rx="10" ry="6" fill="#fff" opacity=".18"/>
+ <ellipse cx="150" cy="111" rx="10" ry="6" fill="#fff" opacity=".18"/>
+
+ <!-- mouth -->
+ <path class="mouth" d="M120 162 q10 11 20 0" stroke="#7c5334" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+ <!-- right arm (waves / poses) -->
+ <g class="arm-r ">
+  <path d="M196 150 q20 6 24 26 q2 12 -8 14 q-10 1 -12 -12 q-2 -16 -8 -24 Z" fill="url(#limbjm)"/>
+ </g>
+
+ <!-- cheer sparkles -->
+ <g class="sparkles">
+  <path d="M40 60 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z" fill="#faa71a"/>
+  <path d="M214 52 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5 Z" fill="#28b7d9"/>
+  <circle cx="52" cy="120" r="3.5" fill="#28b7d9"/>
+  <circle cx="210" cy="110" r="3.5" fill="#faa71a"/>
+ </g>
+</svg></g></svg></div><div class="nextc">
+      <div class="nx-top"><div><div class="nx-lbl">Next stop</div><div class="nx-name">Stage 4 · Mutawassit</div></div>
+        <div class="nx-away">about <b>4</b> classes away</div></div>
+      <div class="bar"><span style="width:60%"></span></div>
+      <a class="cta">Continue your journey</a></div>
+      </div></div></div></div>
+<div class="frame-wrap"><div class="frame-label">Desktop · <b>1440px</b></div><div class="frame f-desktop"><div class="shell">
+      <div class="side"><div class="brand"><span class="mark"><svg class="" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z"/></svg></span>Quran Odyssey</div>
+        <div class="nav"><div class="navi on"><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg>Home</div><div class="navi "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M9 5 3 7v12l6-2 6 2 6-2V5l-6 2-6-2z"/><path d="M9 5v12M15 7v12"/></svg>Journey</div><div class="navi "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polygon points="12 3 14.5 8.5 20.5 9.3 16 13.5 17.2 19.5 12 16.5 6.8 19.5 8 13.5 3.5 9.3 9.5 8.5"/></svg>Rewards</div><div class="navi "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z"/></svg>Homework</div><div class="navi "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="12" cy="8" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>Profile</div></div>
+        <div class="who"><div class="a"><svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="baside" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs>
+ <path d="M16 98 C16 71 33 61 50 61 C67 61 84 71 84 98 Z" fill="url(#baside)"/><circle cx="50" cy="46" r="17" fill="#f6efe2"/>
+ <path d="M32 45 C32 26 39 21 50 21 C61 21 68 26 68 45 C59 40 41 40 32 45 Z" fill="#0d2840"/></svg></div><div><div class="n">Saafir</div><div class="s">Stage 3 · Muthābir</div></div></div>
+      </div>
+      <div class="home d-main">
+        <div class="d-top"><div><div class="hi">Assalāmu ʿalaykum,</div><div class="hn" style="font-size:24px">Saafir</div></div>
+          <div class="d-stats"><div class="stat"><svg class="si" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M12 3c2 4 5 5 5 9a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-8z"/></svg><div><div class="sv">5</div><div class="sl">class streak</div></div></div><div class="stat"><svg class="si" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M20 6 9 17l-5-5"/></svg><div><div class="sv">38</div><div class="sl">sessions</div></div></div><div class="stat"><svg class="si" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polygon points="12 3 14.5 8.5 20.5 9.3 16 13.5 17.2 19.5 12 16.5 6.8 19.5 8 13.5 3.5 9.3 9.5 8.5"/></svg><div><div class="sv">5</div><div class="sl">badges</div></div></div><button class="sound"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 9a4 4 0 0 1 0 6"/></svg> Sounds on</button></div></div>
+        <div class="jtitle"><h2>Your journey</h2><div class="chip"><span class="dot"></span>Keep going — you're doing beautifully</div></div>
+        <div class="d-grid"><div class="jwrap"><svg viewBox="0 0 1192 430" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" class="jsvg">
+     <defs>
+      <linearGradient id="pathg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#5fd0ec"/><stop offset="1" stop-color="#28b7d9"/></linearGradient>
+     </defs>
+     <path d="M 110.0 300.0 C 136.7 281.7 216.7 186.7 270.0 190.0 C 323.3 193.3 376.7 318.3 430.0 320.0 C 483.3 321.7 536.7 198.3 590.0 200.0 C 643.3 201.7 696.7 328.3 750.0 330.0 C 803.3 331.7 866.7 211.7 910.0 210.0 C 953.3 208.3 975.0 330.0 1010.0 320.0 C 1045.0 310.0 1101.7 178.3 1120.0 150.0 " fill="none" stroke="#dbe4ec" stroke-width="14" stroke-linecap="round" stroke-dasharray="2 22"/>
+     <path d="M 110.0 300.0 C 136.7 281.7 216.7 186.7 270.0 190.0 C 323.3 193.3 403.3 298.3 430.0 320.0 " fill="none" stroke="url(#pathg)" stroke-width="14" stroke-linecap="round"/>
+    <g class="node done">
+          <circle cx="110" cy="300" r="26" fill="#94a3b8"/>
+          <circle cx="110" cy="300" r="26" fill="none" stroke="#fff" stroke-width="3" opacity=".55"/>
+          <path d="M100 300 l7 8 13 -15" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="110" y="346" text-anchor="middle" class="nlabel done-l">Mubtadiʼ</text></g><g class="node done">
+          <circle cx="270" cy="190" r="26" fill="#5fd0ec"/>
+          <circle cx="270" cy="190" r="26" fill="none" stroke="#fff" stroke-width="3" opacity=".55"/>
+          <path d="M260 190 l7 8 13 -15" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="270" y="236" text-anchor="middle" class="nlabel done-l">Mutaʼallim</text></g><g class="node current">
+          <circle class="pulse" cx="430" cy="320" r="34" fill="#28b7d9" opacity=".18"/>
+          <circle cx="430" cy="320" r="30" fill="#fff" stroke="#28b7d9" stroke-width="5"/>
+          <circle cx="430" cy="320" r="17" fill="#28b7d9"/>
+          <text x="430" y="325" text-anchor="middle" fill="#fff" font-weight="800" font-size="17">3</text>
+          <g class="youare"><rect x="382" y="248" width="96" height="25" rx="12.5" fill="#0d2840"/>
+          <text x="430" y="265" text-anchor="middle" fill="#fff" font-size="10.5" font-weight="800" letter-spacing=".3">YOU'RE HERE</text>
+          <path d="M424 273 l6 7 6 -7 Z" fill="#0d2840"/></g>
+          <text x="430" y="372" text-anchor="middle" class="nlabel cur-l">Muthābir</text></g><g class="node locked">
+      <circle cx="590" cy="200" r="22" fill="#e2e8f0"/>
+      <path d="M583 199 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="#94a3b8" stroke-width="2.6"/>
+      <rect x="581" y="199" width="18" height="14" rx="3.5" fill="#94a3b8"/>
+      <text x="590" y="240" text-anchor="middle" class="nlabel lock-l">Mutawassit</text></g><g class="node locked">
+      <circle cx="750" cy="330" r="22" fill="#e2e8f0"/>
+      <path d="M743 329 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="#94a3b8" stroke-width="2.6"/>
+      <rect x="741" y="329" width="18" height="14" rx="3.5" fill="#94a3b8"/>
+      <text x="750" y="370" text-anchor="middle" class="nlabel lock-l">Mujtahid</text></g><g class="node locked">
+      <circle cx="910" cy="210" r="22" fill="#e2e8f0"/>
+      <path d="M903 209 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="#94a3b8" stroke-width="2.6"/>
+      <rect x="901" y="209" width="18" height="14" rx="3.5" fill="#94a3b8"/>
+      <text x="910" y="250" text-anchor="middle" class="nlabel lock-l">Mutaqaddim</text></g><g class="node locked">
+      <circle cx="1010" cy="320" r="22" fill="#e2e8f0"/>
+      <path d="M1003 319 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="#94a3b8" stroke-width="2.6"/>
+      <rect x="1001" y="319" width="18" height="14" rx="3.5" fill="#94a3b8"/>
+      <text x="1010" y="360" text-anchor="middle" class="nlabel lock-l">Mutqin</text></g><g class="node locked">
+      <circle cx="1120" cy="150" r="22" fill="#e2e8f0"/>
+      <path d="M1113 149 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="#94a3b8" stroke-width="2.6"/>
+      <rect x="1111" y="149" width="18" height="14" rx="3.5" fill="#94a3b8"/>
+      <text x="1120" y="190" text-anchor="middle" class="nlabel lock-l">Ḥāfiẓ</text></g><g class="jmascot" transform="translate(474,146) scale(0.34)">
+<svg class="book-svg" viewBox="0 0 260 285" width="260" height="285" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient id="coverjm" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#f5eede"/><stop offset=".55" stop-color="#ece0c9"/>
+    <stop offset="1" stop-color="#ddccae"/></linearGradient>
+  <linearGradient id="spinejm" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#9a4327"/><stop offset="1" stop-color="#c1663f"/></linearGradient>
+  <linearGradient id="backjm" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#b7592f"/><stop offset="1" stop-color="#98431f"/></linearGradient>
+  <radialGradient id="irisjm" cx=".38" cy=".33" r=".75">
+    <stop offset="0" stop-color="#4d3826"/><stop offset=".7" stop-color="#392618"/>
+    <stop offset="1" stop-color="#241610"/></radialGradient>
+  <linearGradient id="rimjm" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#7a5238"/><stop offset="1" stop-color="#5b3a25"/></linearGradient>
+  <linearGradient id="limbjm" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#efe6d4"/><stop offset="1" stop-color="#d8c6a7"/></linearGradient>
+  <radialGradient id="glowjm" cx=".5" cy=".35" r=".65">
+    <stop offset="0" stop-color="#ffffff" stop-opacity=".55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+ </defs>
+
+ <!-- ground shadow -->
+ <ellipse class="shadow" cx="130" cy="266" rx="66" ry="13" fill="#43301c" opacity=".16"/>
+
+ <!-- legs -->
+ <g class="legs">
+  <rect x="104" y="212" width="16" height="34" rx="8" fill="url(#limbjm)"/>
+  <rect x="140" y="212" width="16" height="34" rx="8" fill="url(#limbjm)"/>
+  <ellipse cx="110" cy="248" rx="14" ry="9" fill="url(#limbjm)"/>
+  <ellipse cx="150" cy="248" rx="14" ry="9" fill="url(#limbjm)"/>
+ </g>
+
+ <!-- left arm (resting) -->
+ <g class="arm-l ">
+  <path d="M64 150 q-20 6 -24 26 q-2 12 8 14 q10 1 12 -12 q2 -16 8 -24 Z" fill="url(#limbjm)"/>
+ </g>
+
+ <!-- BOOK BODY -->
+ <!-- back cover (rust) peeking right + bottom -->
+ <rect x="74" y="48" width="132" height="176" rx="20" fill="url(#backjm)"/>
+ <!-- spine (left) -->
+ <rect x="52" y="52" width="34" height="168" rx="14" fill="url(#spinejm)"/>
+ <!-- top cover flap (raised corner, rust) -->
+ <path d="M60 60 q-6 -18 14 -20 l104 0 q16 2 14 16 l-2 8 q-4 -8 -16 -8 l-96 0 q-16 0 -18 12 Z" fill="#b05a34" opacity=".9"/>
+ <!-- front cover (cream) -->
+ <rect x="60" y="44" width="140" height="178" rx="19" fill="url(#coverjm)"/>
+ <!-- page hint under spine -->
+ <rect x="63" y="60" width="4" height="152" rx="2" fill="#e9dcc2"/>
+ <!-- soft top-left sheen on cover -->
+ <ellipse cx="108" cy="86" rx="52" ry="30" fill="url(#glowjm)"/>
+
+ <!-- FACE -->
+ <!-- blush -->
+ <ellipse class="blush" cx="88" cy="158" rx="14" ry="8.5" fill="#ef9a94" opacity=".62"/>
+ <ellipse class="blush" cx="172" cy="158" rx="14" ry="8.5" fill="#ef9a94" opacity=".62"/>
+
+  <!-- glasses temples -->
+ <path d="M70 122 l-14 -3" stroke="url(#rimjm)" stroke-width="6" stroke-linecap="round"/>
+ <path d="M190 122 l14 -3" stroke="url(#rimjm)" stroke-width="6" stroke-linecap="round"/>
+ <!-- bridge -->
+ <path d="M127 121 q3 -6 6 0" stroke="url(#rimjm)" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+ <!-- EYES (round, glossy) -->
+ <g class="eyes-round">
+  <circle cx="100" cy="124" r="27" fill="#fbf7ef"/>
+  <circle cx="160" cy="124" r="27" fill="#fbf7ef"/>
+  <g class="pupils">
+   <circle cx="100" cy="127" r="20" fill="url(#irisjm)"/>
+   <circle cx="160" cy="127" r="20" fill="url(#irisjm)"/>
+   <circle cx="93" cy="119" r="8" fill="#fff"/>
+   <circle cx="153" cy="119" r="8" fill="#fff"/>
+   <circle cx="107" cy="134" r="3.4" fill="#fff" opacity=".85"/>
+   <circle cx="167" cy="134" r="3.4" fill="#fff" opacity=".85"/>
+  </g>
+  <!-- blink lids -->
+  <rect class="lid" x="71" y="94" width="58" height="60" rx="28" fill="url(#coverjm)"/>
+  <rect class="lid" x="131" y="94" width="58" height="60" rx="28" fill="url(#coverjm)"/>
+ </g>
+ <!-- EYES (happy ^_^) -->
+ <g class="eyes-happy">
+  <path d="M86 129 q14 -20 28 0" stroke="#392618" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M146 129 q14 -20 28 0" stroke="#392618" stroke-width="6" fill="none" stroke-linecap="round"/>
+ </g>
+
+ <!-- glasses rims (drawn over eyes) -->
+ <circle cx="100" cy="124" r="31" fill="none" stroke="url(#rimjm)" stroke-width="7"/>
+ <circle cx="160" cy="124" r="31" fill="none" stroke="url(#rimjm)" stroke-width="7"/>
+ <ellipse cx="90" cy="111" rx="10" ry="6" fill="#fff" opacity=".18"/>
+ <ellipse cx="150" cy="111" rx="10" ry="6" fill="#fff" opacity=".18"/>
+
+ <!-- mouth -->
+ <path class="mouth" d="M120 162 q10 11 20 0" stroke="#7c5334" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+ <!-- right arm (waves / poses) -->
+ <g class="arm-r ">
+  <path d="M196 150 q20 6 24 26 q2 12 -8 14 q-10 1 -12 -12 q-2 -16 -8 -24 Z" fill="url(#limbjm)"/>
+ </g>
+
+ <!-- cheer sparkles -->
+ <g class="sparkles">
+  <path d="M40 60 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z" fill="#faa71a"/>
+  <path d="M214 52 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5 Z" fill="#28b7d9"/>
+  <circle cx="52" cy="120" r="3.5" fill="#28b7d9"/>
+  <circle cx="210" cy="110" r="3.5" fill="#faa71a"/>
+ </g>
+</svg></g></svg></div><div><div class="nextc">
+      <div class="nx-top"><div><div class="nx-lbl">Next stop</div><div class="nx-name">Stage 4 · Mutawassit</div></div>
+        <div class="nx-away">about <b>4</b> classes away</div></div>
+      <div class="bar"><span style="width:60%"></span></div>
+      <a class="cta">Continue your journey</a></div></div></div>
+      </div></div></div></div>
+</div></body></html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Parent View — Quran Odyssey Module 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#e9eef3;color:#0f172a;-webkit-font-smoothing:antialiased;padding:48px 0 80px}
+.board{max-width:1520px;margin:0 auto;padding:0 24px}
+.board-title{text-align:center;margin-bottom:8px;font-size:22px;font-weight:800;letter-spacing:-.5px;color:#0d2840}
+.board-sub{text-align:center;color:#64748b;font-size:14px;margin-bottom:44px;max-width:720px;margin-left:auto;margin-right:auto}
+.frame-wrap{margin:0 auto 56px;display:flex;flex-direction:column;align-items:center}
+.frame-label{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#94a3b8;margin-bottom:12px}
+.frame-label b{color:#0d2840;font-weight:800}
+.frame{background:#fff;border:1px solid #d5dde5;border-radius:22px;overflow:hidden;box-shadow:0 24px 60px rgba(13,40,64,.10)}
+.f-phone{width:360px}.f-tablet{width:768px}.f-desktop{width:1440px}
+.shell{display:flex}
+.main{flex:1;min-width:0;background:#f7f9fb;padding:24px 30px 30px}
+/* chips/buttons */
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#0e6e8a;background:#e8f8fc;border:1px solid rgba(40,183,217,.25);border-radius:999px;padding:4px 10px}
+.chip.sm{font-size:10px;padding:3px 9px;letter-spacing:.3px}
+/* topbar */
+.tb{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.tb-hi{font-size:12px;color:#64748b;font-weight:600}.tb-h{font-size:22px;font-weight:800;letter-spacing:-.4px;color:#0d2840}
+.tb-r{display:flex;align-items:center;gap:12px}
+.bell{position:relative;width:40px;height:40px;border-radius:11px;background:#fff;border:1px solid #e2e8f0;display:flex;align-items:center;justify-content:center;color:#0d2840;cursor:pointer}
+.bell .bdot{position:absolute;top:9px;right:10px;width:7px;height:7px;border-radius:50%;background:#faa71a;border:1.5px solid #fff}
+.switch{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:#0e6e8a;background:#e8f8fc;border:1px solid rgba(40,183,217,.25);border-radius:10px;padding:9px 14px;cursor:pointer}
+/* section header */
+.sec-h{display:flex;align-items:center;gap:12px;margin:4px 0 14px}
+.sec-h h2{font-size:18px;font-weight:800;color:#0d2840;letter-spacing:-.3px}
+.tag{font-size:11px;font-weight:700;color:#64748b;background:#f0f4f8;border:1px solid #e2e8f0;border-radius:999px;padding:3px 10px}
+/* children grid */
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f-tablet .cgrid{grid-template-columns:repeat(2,1fr)}
+.cc{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.cc-top{display:flex;align-items:center;gap:12px}
+.cc-ava{width:46px;height:46px;border-radius:50%;overflow:hidden;background:#e8f8fc;border:1px solid #cdeaf3;display:flex;align-items:flex-end;justify-content:center;flex-shrink:0}
+.cc-name{font-size:17px;font-weight:800;color:#0d2840;margin-bottom:5px}
+.cc-meta{display:flex;flex-direction:column;gap:8px;padding:12px 0;border-top:1px solid #eef2f6;border-bottom:1px solid #eef2f6}
+.mrow{display:flex;align-items:center;justify-content:space-between;font-size:13px}
+.mk{color:#94a3b8;font-weight:600}.mv{font-weight:800}.mv2{color:#0f172a;font-weight:700;font-size:12.5px}
+.prog .prow{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px}
+.prog .pl{color:#64748b;font-weight:600}.prog .pp{color:#0d2840;font-weight:800}
+.bar{height:8px;background:#eef2f6;border-radius:999px;overflow:hidden}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,#5fd0ec,#28b7d9);border-radius:999px}
+.prog.awaiting{display:flex;flex-direction:column;gap:3px}
+.prog.awaiting .pl{font-size:12px;color:#64748b;font-weight:600}
+.prog.awaiting .pv{font-size:12.5px;color:#b45309;font-weight:700;font-style:italic}
+.cc-link{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:#0e6e8a;cursor:pointer;margin-top:2px}
+.lk{color:currentColor}
+/* two-col */
+.two{display:grid;grid-template-columns:1fr 340px;gap:16px;margin-top:20px;align-items:start}
+.rstack{display:flex;flex-direction:column;gap:16px}
+.panel{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.ph h3{font-size:15px;font-weight:800;color:#0d2840}
+.phl{display:inline-flex;align-items:center;gap:3px;font-size:12px;font-weight:700;color:#0e6e8a;cursor:pointer}
+/* upcoming */
+.uc{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #eef2f6}
+.uc:last-child{border-bottom:none;padding-bottom:2px}
+.uc-time{font-size:13.5px;font-weight:800;color:#0d2840}
+.uc-sub{font-size:12px;color:#64748b;margin-top:2px}
+.join{display:inline-flex;align-items:center;gap:6px;background:#faa71a;color:#0d2840;font-weight:800;font-size:13px;padding:9px 15px;border-radius:9px;cursor:pointer;white-space:nowrap}
+.soon{display:inline-flex;align-items:center;gap:6px;color:#94a3b8;font-weight:700;font-size:12px;white-space:nowrap}
+/* messages */
+.msg{display:flex;align-items:flex-start;gap:11px;padding:11px 0;border-bottom:1px solid #eef2f6;position:relative}
+.msg:last-child{border-bottom:none}
+.msg-av{width:34px;height:34px;border-radius:50%;background:#0d2840;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.msg-top{display:flex;justify-content:space-between;gap:8px}
+.msg-n{font-size:13px;font-weight:800;color:#0d2840}.msg-t{font-size:11px;color:#94a3b8;font-weight:600}
+.msg-s{font-size:12.5px;color:#64748b;margin-top:2px;line-height:1.45;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:230px}
+.unread{position:absolute;right:0;top:16px;width:8px;height:8px;border-radius:50%;background:#28b7d9}
+/* billing */
+.bill .bl-plan,.bill .bl-next{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #eef2f6}
+.bl-k{font-size:11px;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.bl-v{font-size:14px;font-weight:800;color:#0d2840;margin-top:3px}
+.badge-ok{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:800;color:#15803d;background:rgba(34,197,94,.1);border-radius:999px;padding:5px 10px}
+.bl-btn{display:block;text-align:center;margin-top:14px;background:#0d2840;color:#fff;font-weight:800;font-size:13.5px;padding:12px;border-radius:10px;cursor:pointer}
+/* sidebar (desktop) */
+.side{width:248px;flex-shrink:0;background:#fff;border-right:1px solid #e2e8f0;padding:22px 16px;display:flex;flex-direction:column}
+.side .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:#0d2840;font-size:16px;padding:0 8px 8px}
+.side .brand .mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#28b7d9,#0e6e8a);display:flex;align-items:center;justify-content:center}
+.side .plabel{font-size:10.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:#94a3b8;padding:14px 10px 6px}
+.side .nav{display:flex;flex-direction:column;gap:3px}
+.navi{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;font-size:14px;font-weight:600;color:#64748b;cursor:pointer}
+.navi.on{background:#e8f8fc;color:#0e6e8a;font-weight:700}
+.navi .ni{color:inherit}
+.side .who{margin-top:auto;display:flex;align-items:center;gap:11px;padding:10px;border:1px solid #e2e8f0;border-radius:12px}
+.side .who .a{width:38px;height:38px;border-radius:50%;overflow:hidden;background:#fff7ea;border:1px solid #f5e2c0;display:flex;align-items:flex-end;justify-content:center}
+.side .who .n{font-size:13.5px;font-weight:800;color:#0d2840}.side .who .s{font-size:11.5px;color:#64748b;font-weight:600}
+/* rail (tablet) */
+.rail{width:64px;flex-shrink:0;background:#fff;border-right:1px solid #e2e8f0;display:flex;flex-direction:column;align-items:center;padding:16px 0;gap:6px}
+.rail .mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#28b7d9,#0e6e8a);display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.rail .ri{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#94a3b8}
+.rail .ri.on{background:#e8f8fc;color:#0e6e8a}
+/* bottom tab (phone) */
+.tabbar{display:flex;justify-content:space-around;align-items:center;background:#fff;border-top:1px solid #e2e8f0;padding:9px 6px 11px}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:700;color:#94a3b8}
+.tab.on{color:#0e6e8a}.tab .ni{color:inherit}
+</style></head><body><div class="board">
+<div class="board-title">Module 5 · Screen 4 — Parent View</div>
+<div class="board-sub">The adult surface. Deliberately calm and professional — no journey, no mascot, no gamification. Multi-child overview, teacher-set progress (with the honest 'awaiting assessment' state), upcoming classes, messages and billing.</div>
+<div class="frame-wrap"><div class="frame-label">Phone · <b>360px</b></div><div class="frame f-phone"><div class="shell"><div class="main" style="padding:20px 16px">
+        <div class="tb"><div><div class="tb-hi">Assalāmu ʿalaykum</div><div class="tb-h">The Rahman family</div></div>
+      <div class="tb-r"><a class="bell"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="bdot"></span></a><a class="switch"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg> Switch profile</a></div></div>
+        <div class="sec-h"><h2>Your children</h2><span class="tag">3 enrolled</span></div><div class="cgrid" style="grid-template-columns:1fr"><div class="cc">
+      <div class="cc-top"><div class="cc-ava"><svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="ppa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs><path d="M16 98 C16 71 33 61 50 61 C67 61 84 71 84 98 Z" fill="url(#ppa)"/><circle cx="50" cy="46" r="17" fill="#f6efe2"/><path d="M32 45 C32 26 39 21 50 21 C61 21 68 26 68 45 C59 40 41 40 32 45 Z" fill="#0d2840"/></svg></div>
+        <div class="cc-id"><div class="cc-name">Zayd</div><div class="chip sm">Stage 2 · Mutaʼallim</div></div></div>
+      <div class="cc-meta">
+        <div class="mrow"><span class="mk">Attendance</span><span class="mv" style="color:#22c55e">92%</span></div>
+        <div class="mrow"><span class="mk">Next class</span><span class="mv2">Tomorrow · 5:00 PM</span></div>
+        <div class="mrow"><span class="mk">Teacher</span><span class="mv2">Ustadha Ayesha</span></div>
+      </div>
+      <div class="prog"><div class="prow"><span class="pl">Tajweed progress</span><span class="pp">45%</span></div><div class="bar"><span style="width:45%"></span></div></div>
+      <a class="cc-link">View full report <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div><div class="cc">
+      <div class="cc-top"><div class="cc-ava"><svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="ppb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs><path d="M12 98 C12 75 30 65 50 65 C70 65 88 75 88 98 Z" fill="url(#ppb)"/><path d="M27 53 C27 27 38 17 50 17 C62 17 73 27 73 53 C73 64 65 71 50 71 C35 71 27 64 27 53 Z" fill="url(#ppb)"/><ellipse cx="50" cy="48" rx="13" ry="16" fill="#f6efe2"/></svg></div>
+        <div class="cc-id"><div class="cc-name">Meerub</div><div class="chip sm">Stage 4 · Mutawassit</div></div></div>
+      <div class="cc-meta">
+        <div class="mrow"><span class="mk">Attendance</span><span class="mv" style="color:#22c55e">96%</span></div>
+        <div class="mrow"><span class="mk">Next class</span><span class="mv2">Today · 6:30 PM</span></div>
+        <div class="mrow"><span class="mk">Teacher</span><span class="mv2">Ustadha Maryam</span></div>
+      </div>
+      <div class="prog"><div class="prow"><span class="pl">Tajweed progress</span><span class="pp">70%</span></div><div class="bar"><span style="width:70%"></span></div></div>
+      <a class="cc-link">View full report <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div><div class="cc">
+      <div class="cc-top"><div class="cc-ava"><svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="ppc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs><path d="M16 98 C16 71 33 61 50 61 C67 61 84 71 84 98 Z" fill="url(#ppc)"/><circle cx="50" cy="46" r="17" fill="#f6efe2"/><path d="M32 45 C32 26 39 21 50 21 C61 21 68 26 68 45 C59 40 41 40 32 45 Z" fill="#0d2840"/></svg></div>
+        <div class="cc-id"><div class="cc-name">Saafir</div><div class="chip sm">Stage 3 · Muthābir</div></div></div>
+      <div class="cc-meta">
+        <div class="mrow"><span class="mk">Attendance</span><span class="mv" style="color:#e8920a">88%</span></div>
+        <div class="mrow"><span class="mk">Next class</span><span class="mv2">Wed · 4:30 PM</span></div>
+        <div class="mrow"><span class="mk">Teacher</span><span class="mv2">Ustadh Bilal</span></div>
+      </div>
+      <div class="prog awaiting"><span class="pl">Tajweed progress</span><span class="pv">Awaiting teacher assessment</span></div>
+      <a class="cc-link">View full report <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div></div>
+        <div style="height:16px"></div><div class="panel"><div class="ph"><h3>Upcoming classes</h3><a class="phl">Full schedule <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M9 6l6 6-6 6"/></svg></a></div><div class="uc"><div class="uc-t"><div class="uc-time">Today · 6:30 PM</div><div class="uc-sub">Tajweed · Meerub · Ustadha Maryam</div></div><a class="join"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10l6-3v10l-6-3z"/></svg> Join</a></div><div class="uc"><div class="uc-t"><div class="uc-time">Tomorrow · 5:00 PM</div><div class="uc-sub">Quran Reading · Zayd · Ustadha Ayesha</div></div><span class="soon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Scheduled</span></div><div class="uc"><div class="uc-t"><div class="uc-time">Wed · 4:30 PM</div><div class="uc-sub">Hifz · Saafir · Ustadh Bilal</div></div><span class="soon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Scheduled</span></div></div>
+        <div style="height:16px"></div><div class="panel"><div class="ph"><h3>Messages</h3><a class="phl">Open inbox <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M9 6l6 6-6 6"/></svg></a></div><div class="msg"><div class="msg-av">UB</div><div class="msg-b"><div class="msg-top"><span class="msg-n">Ustadh Bilal</span><span class="msg-t">2h</span></div><div class="msg-s">Saafir did really well with Surah Al-Mulk today —</div></div><span class="unread"></span></div><div class="msg"><div class="msg-av">UM</div><div class="msg-b"><div class="msg-top"><span class="msg-n">Ustadha Maryam</span><span class="msg-t">1d</span></div><div class="msg-s">Reminder: Meerub's assessment is next week.</div></div><span class="unread"></span></div><div class="msg"><div class="msg-av">UA</div><div class="msg-b"><div class="msg-top"><span class="msg-n">Ustadha Ayesha</span><span class="msg-t">3d</span></div><div class="msg-s">Thank you for the update, no problem at all.</div></div></div></div>
+        <div style="height:16px"></div><div class="panel bill"><div class="ph"><h3>Billing</h3></div>
+      <div class="bl-plan"><div><div class="bl-k">Current plan</div><div class="bl-v">Family · 3 children</div></div><span class="badge-ok"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M20 6 9 17l-5-5"/></svg> Active</span></div>
+      <div class="bl-next"><div><div class="bl-k">Next payment</div><div class="bl-v">£54.00 · 1 Sep 2026</div></div></div>
+      <a class="bl-btn">Manage billing</a></div>
+      </div></div><div class="tabbar"><div class="tab on"><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Home</span></div><div class="tab "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.2a3 3 0 0 1 0 5.6M17 20a5.5 5.5 0 0 0-2-4.3"/></svg><span>Children</span></div><div class="tab "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M4 5h16a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H9l-4 3v-3H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg><span>Messages</span></div><div class="tab "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 9.5h18"/></svg><span>Billing</span></div></div></div></div>
+<div class="frame-wrap"><div class="frame-label">Tablet · <b>768px</b></div><div class="frame f-tablet"><div class="shell">
+      <div class="rail"><div class="mark"><svg class="" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z"/></svg></div><div class="ri on"><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div><div class="ri "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.2a3 3 0 0 1 0 5.6M17 20a5.5 5.5 0 0 0-2-4.3"/></svg></div><div class="ri "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg></div><div class="ri "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M4 5h16a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H9l-4 3v-3H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg></div><div class="ri "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 9.5h18"/></svg></div><div class="ri "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M22 12h-3M5 12H2M19 5l-2 2M7 17l-2 2M19 19l-2-2M7 7 5 5"/></svg></div></div>
+      <div class="main"><div class="tb"><div><div class="tb-hi">Assalāmu ʿalaykum</div><div class="tb-h">The Rahman family</div></div>
+      <div class="tb-r"><a class="bell"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="bdot"></span></a><a class="switch"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg> Switch profile</a></div></div><div class="sec-h"><h2>Your children</h2><span class="tag">3 enrolled</span></div>
+      <div class="cgrid"><div class="cc">
+      <div class="cc-top"><div class="cc-ava"><svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="pa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs><path d="M16 98 C16 71 33 61 50 61 C67 61 84 71 84 98 Z" fill="url(#pa)"/><circle cx="50" cy="46" r="17" fill="#f6efe2"/><path d="M32 45 C32 26 39 21 50 21 C61 21 68 26 68 45 C59 40 41 40 32 45 Z" fill="#0d2840"/></svg></div>
+        <div class="cc-id"><div class="cc-name">Zayd</div><div class="chip sm">Stage 2 · Mutaʼallim</div></div></div>
+      <div class="cc-meta">
+        <div class="mrow"><span class="mk">Attendance</span><span class="mv" style="color:#22c55e">92%</span></div>
+        <div class="mrow"><span class="mk">Next class</span><span class="mv2">Tomorrow · 5:00 PM</span></div>
+        <div class="mrow"><span class="mk">Teacher</span><span class="mv2">Ustadha Ayesha</span></div>
+      </div>
+      <div class="prog"><div class="prow"><span class="pl">Tajweed progress</span><span class="pp">45%</span></div><div class="bar"><span style="width:45%"></span></div></div>
+      <a class="cc-link">View full report <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div><div class="cc">
+      <div class="cc-top"><div class="cc-ava"><svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="pb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs><path d="M12 98 C12 75 30 65 50 65 C70 65 88 75 88 98 Z" fill="url(#pb)"/><path d="M27 53 C27 27 38 17 50 17 C62 17 73 27 73 53 C73 64 65 71 50 71 C35 71 27 64 27 53 Z" fill="url(#pb)"/><ellipse cx="50" cy="48" rx="13" ry="16" fill="#f6efe2"/></svg></div>
+        <div class="cc-id"><div class="cc-name">Meerub</div><div class="chip sm">Stage 4 · Mutawassit</div></div></div>
+      <div class="cc-meta">
+        <div class="mrow"><span class="mk">Attendance</span><span class="mv" style="color:#22c55e">96%</span></div>
+        <div class="mrow"><span class="mk">Next class</span><span class="mv2">Today · 6:30 PM</span></div>
+        <div class="mrow"><span class="mk">Teacher</span><span class="mv2">Ustadha Maryam</span></div>
+      </div>
+      <div class="prog"><div class="prow"><span class="pl">Tajweed progress</span><span class="pp">70%</span></div><div class="bar"><span style="width:70%"></span></div></div>
+      <a class="cc-link">View full report <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div><div class="cc">
+      <div class="cc-top"><div class="cc-ava"><svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="pc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs><path d="M16 98 C16 71 33 61 50 61 C67 61 84 71 84 98 Z" fill="url(#pc)"/><circle cx="50" cy="46" r="17" fill="#f6efe2"/><path d="M32 45 C32 26 39 21 50 21 C61 21 68 26 68 45 C59 40 41 40 32 45 Z" fill="#0d2840"/></svg></div>
+        <div class="cc-id"><div class="cc-name">Saafir</div><div class="chip sm">Stage 3 · Muthābir</div></div></div>
+      <div class="cc-meta">
+        <div class="mrow"><span class="mk">Attendance</span><span class="mv" style="color:#e8920a">88%</span></div>
+        <div class="mrow"><span class="mk">Next class</span><span class="mv2">Wed · 4:30 PM</span></div>
+        <div class="mrow"><span class="mk">Teacher</span><span class="mv2">Ustadh Bilal</span></div>
+      </div>
+      <div class="prog awaiting"><span class="pl">Tajweed progress</span><span class="pv">Awaiting teacher assessment</span></div>
+      <a class="cc-link">View full report <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div></div>
+        <div class="two" style="grid-template-columns:1fr;"><div class="panel"><div class="ph"><h3>Upcoming classes</h3><a class="phl">Full schedule <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M9 6l6 6-6 6"/></svg></a></div><div class="uc"><div class="uc-t"><div class="uc-time">Today · 6:30 PM</div><div class="uc-sub">Tajweed · Meerub · Ustadha Maryam</div></div><a class="join"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10l6-3v10l-6-3z"/></svg> Join</a></div><div class="uc"><div class="uc-t"><div class="uc-time">Tomorrow · 5:00 PM</div><div class="uc-sub">Quran Reading · Zayd · Ustadha Ayesha</div></div><span class="soon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Scheduled</span></div><div class="uc"><div class="uc-t"><div class="uc-time">Wed · 4:30 PM</div><div class="uc-sub">Hifz · Saafir · Ustadh Bilal</div></div><span class="soon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Scheduled</span></div></div><div class="rstack" style="flex-direction:row"><div class="panel"><div class="ph"><h3>Messages</h3><a class="phl">Open inbox <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M9 6l6 6-6 6"/></svg></a></div><div class="msg"><div class="msg-av">UB</div><div class="msg-b"><div class="msg-top"><span class="msg-n">Ustadh Bilal</span><span class="msg-t">2h</span></div><div class="msg-s">Saafir did really well with Surah Al-Mulk today —</div></div><span class="unread"></span></div><div class="msg"><div class="msg-av">UM</div><div class="msg-b"><div class="msg-top"><span class="msg-n">Ustadha Maryam</span><span class="msg-t">1d</span></div><div class="msg-s">Reminder: Meerub's assessment is next week.</div></div><span class="unread"></span></div><div class="msg"><div class="msg-av">UA</div><div class="msg-b"><div class="msg-top"><span class="msg-n">Ustadha Ayesha</span><span class="msg-t">3d</span></div><div class="msg-s">Thank you for the update, no problem at all.</div></div></div></div><div class="panel bill"><div class="ph"><h3>Billing</h3></div>
+      <div class="bl-plan"><div><div class="bl-k">Current plan</div><div class="bl-v">Family · 3 children</div></div><span class="badge-ok"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M20 6 9 17l-5-5"/></svg> Active</span></div>
+      <div class="bl-next"><div><div class="bl-k">Next payment</div><div class="bl-v">£54.00 · 1 Sep 2026</div></div></div>
+      <a class="bl-btn">Manage billing</a></div></div></div>
+      </div></div></div></div>
+<div class="frame-wrap"><div class="frame-label">Desktop · <b>1440px</b></div><div class="frame f-desktop"><div class="shell"><div class="side"><div class="brand"><span class="mark"><svg class="" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z"/></svg></span>Quran Odyssey</div>
+      <div class="plabel">Parent</div><div class="nav"><div class="navi on"><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Overview</div><div class="navi "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.2a3 3 0 0 1 0 5.6M17 20a5.5 5.5 0 0 0-2-4.3"/></svg>Children</div><div class="navi "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg>Schedule</div><div class="navi "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M4 5h16a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H9l-4 3v-3H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg>Messages</div><div class="navi "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 9.5h18"/></svg>Billing</div><div class="navi "><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M22 12h-3M5 12H2M19 5l-2 2M7 17l-2 2M19 19l-2-2M7 7 5 5"/></svg>Settings</div></div>
+      <div class="who"><div class="a"><svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="pside" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbb43a"/><stop offset="1" stop-color="#e0870a"/></linearGradient></defs><path d="M10 99 C10 69 30 58 50 58 C70 58 90 69 90 99 Z" fill="url(#pside)"/><circle cx="50" cy="43" r="18" fill="#f6efe2"/><path d="M30 42 C30 24 39 18 50 18 C61 18 70 24 70 42 C60 37 40 37 30 42 Z" fill="#0d2840"/></svg></div><div><div class="n">Parent</div><div class="s">The Rahman family</div></div></div></div>
+      <div class="main"><div class="tb"><div><div class="tb-hi">Assalāmu ʿalaykum</div><div class="tb-h">The Rahman family</div></div>
+      <div class="tb-r"><a class="bell"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="bdot"></span></a><a class="switch"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg> Switch profile</a></div></div><div class="sec-h"><h2>Your children</h2><span class="tag">3 enrolled</span></div>
+      <div class="cgrid"><div class="cc">
+      <div class="cc-top"><div class="cc-ava"><svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="pa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs><path d="M16 98 C16 71 33 61 50 61 C67 61 84 71 84 98 Z" fill="url(#pa)"/><circle cx="50" cy="46" r="17" fill="#f6efe2"/><path d="M32 45 C32 26 39 21 50 21 C61 21 68 26 68 45 C59 40 41 40 32 45 Z" fill="#0d2840"/></svg></div>
+        <div class="cc-id"><div class="cc-name">Zayd</div><div class="chip sm">Stage 2 · Mutaʼallim</div></div></div>
+      <div class="cc-meta">
+        <div class="mrow"><span class="mk">Attendance</span><span class="mv" style="color:#22c55e">92%</span></div>
+        <div class="mrow"><span class="mk">Next class</span><span class="mv2">Tomorrow · 5:00 PM</span></div>
+        <div class="mrow"><span class="mk">Teacher</span><span class="mv2">Ustadha Ayesha</span></div>
+      </div>
+      <div class="prog"><div class="prow"><span class="pl">Tajweed progress</span><span class="pp">45%</span></div><div class="bar"><span style="width:45%"></span></div></div>
+      <a class="cc-link">View full report <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div><div class="cc">
+      <div class="cc-top"><div class="cc-ava"><svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="pb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs><path d="M12 98 C12 75 30 65 50 65 C70 65 88 75 88 98 Z" fill="url(#pb)"/><path d="M27 53 C27 27 38 17 50 17 C62 17 73 27 73 53 C73 64 65 71 50 71 C35 71 27 64 27 53 Z" fill="url(#pb)"/><ellipse cx="50" cy="48" rx="13" ry="16" fill="#f6efe2"/></svg></div>
+        <div class="cc-id"><div class="cc-name">Meerub</div><div class="chip sm">Stage 4 · Mutawassit</div></div></div>
+      <div class="cc-meta">
+        <div class="mrow"><span class="mk">Attendance</span><span class="mv" style="color:#22c55e">96%</span></div>
+        <div class="mrow"><span class="mk">Next class</span><span class="mv2">Today · 6:30 PM</span></div>
+        <div class="mrow"><span class="mk">Teacher</span><span class="mv2">Ustadha Maryam</span></div>
+      </div>
+      <div class="prog"><div class="prow"><span class="pl">Tajweed progress</span><span class="pp">70%</span></div><div class="bar"><span style="width:70%"></span></div></div>
+      <a class="cc-link">View full report <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div><div class="cc">
+      <div class="cc-top"><div class="cc-ava"><svg viewBox="0 0 100 100" width="100%" height="100%"><defs><linearGradient id="pc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33b3d6"/><stop offset="1" stop-color="#0e6e8a"/></linearGradient></defs><path d="M16 98 C16 71 33 61 50 61 C67 61 84 71 84 98 Z" fill="url(#pc)"/><circle cx="50" cy="46" r="17" fill="#f6efe2"/><path d="M32 45 C32 26 39 21 50 21 C61 21 68 26 68 45 C59 40 41 40 32 45 Z" fill="#0d2840"/></svg></div>
+        <div class="cc-id"><div class="cc-name">Saafir</div><div class="chip sm">Stage 3 · Muthābir</div></div></div>
+      <div class="cc-meta">
+        <div class="mrow"><span class="mk">Attendance</span><span class="mv" style="color:#e8920a">88%</span></div>
+        <div class="mrow"><span class="mk">Next class</span><span class="mv2">Wed · 4:30 PM</span></div>
+        <div class="mrow"><span class="mk">Teacher</span><span class="mv2">Ustadh Bilal</span></div>
+      </div>
+      <div class="prog awaiting"><span class="pl">Tajweed progress</span><span class="pv">Awaiting teacher assessment</span></div>
+      <a class="cc-link">View full report <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div></div>
+        <div class="two"><div><div class="panel"><div class="ph"><h3>Upcoming classes</h3><a class="phl">Full schedule <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M9 6l6 6-6 6"/></svg></a></div><div class="uc"><div class="uc-t"><div class="uc-time">Today · 6:30 PM</div><div class="uc-sub">Tajweed · Meerub · Ustadha Maryam</div></div><a class="join"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10l6-3v10l-6-3z"/></svg> Join</a></div><div class="uc"><div class="uc-t"><div class="uc-time">Tomorrow · 5:00 PM</div><div class="uc-sub">Quran Reading · Zayd · Ustadha Ayesha</div></div><span class="soon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Scheduled</span></div><div class="uc"><div class="uc-t"><div class="uc-time">Wed · 4:30 PM</div><div class="uc-sub">Hifz · Saafir · Ustadh Bilal</div></div><span class="soon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Scheduled</span></div></div></div><div class="rstack"><div class="panel"><div class="ph"><h3>Messages</h3><a class="phl">Open inbox <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M9 6l6 6-6 6"/></svg></a></div><div class="msg"><div class="msg-av">UB</div><div class="msg-b"><div class="msg-top"><span class="msg-n">Ustadh Bilal</span><span class="msg-t">2h</span></div><div class="msg-s">Saafir did really well with Surah Al-Mulk today —</div></div><span class="unread"></span></div><div class="msg"><div class="msg-av">UM</div><div class="msg-b"><div class="msg-top"><span class="msg-n">Ustadha Maryam</span><span class="msg-t">1d</span></div><div class="msg-s">Reminder: Meerub's assessment is next week.</div></div><span class="unread"></span></div><div class="msg"><div class="msg-av">UA</div><div class="msg-b"><div class="msg-top"><span class="msg-n">Ustadha Ayesha</span><span class="msg-t">3d</span></div><div class="msg-s">Thank you for the update, no problem at all.</div></div></div></div><div class="panel bill"><div class="ph"><h3>Billing</h3></div>
+      <div class="bl-plan"><div><div class="bl-k">Current plan</div><div class="bl-v">Family · 3 children</div></div><span class="badge-ok"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M20 6 9 17l-5-5"/></svg> Active</span></div>
+      <div class="bl-next"><div><div class="bl-k">Next payment</div><div class="bl-v">£54.00 · 1 Sep 2026</div></div></div>
+      <a class="bl-btn">Manage billing</a></div></div></div>
+      </div></div></div></div>
+</div></body></html>
