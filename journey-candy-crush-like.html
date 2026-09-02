@@ -1,0 +1,1065 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Journey Map — Quran Odyssey (candy v2)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+        background: #e9eef3;
+        padding: 44px 0 80px;
+        -webkit-font-smoothing: antialiased;
+      }
+      .board {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px;
+        text-align: center;
+      }
+      .chip {
+        display: inline-flex;
+        gap: 7px;
+        align-items: center;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.66px;
+        text-transform: uppercase;
+        color: #0e6e8a;
+        background: #e8f8fc;
+        border: 1px solid rgba(40, 183, 217, 0.25);
+        border-radius: 999px;
+        padding: 5px 13px;
+        margin-bottom: 14px;
+      }
+      .board h1 {
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.6px;
+        color: #0d2840;
+      }
+      .board .sub {
+        color: #64748b;
+        font-size: 14px;
+        margin: 8px auto 30px;
+        max-width: 560px;
+      }
+      .fl {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        color: #94a3b8;
+        margin-bottom: 12px;
+      }
+      .phone {
+        width: 400px;
+        margin: 0 auto;
+        border-radius: 30px;
+        overflow: hidden;
+        border: 1px solid #d5dde5;
+        box-shadow: 0 30px 70px rgba(13, 40, 64, 0.18);
+        background: #000;
+        position: relative;
+      }
+      .scroller {
+        height: 760px;
+        overflow-y: auto;
+        position: relative;
+      }
+      .scroller::-webkit-scrollbar {
+        width: 0;
+      }
+      /* top HUD overlay */
+      .hud {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 14px;
+        background: linear-gradient(#ffffffee, #ffffffcc);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid #ffffff;
+      }
+      .hud .who {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+      }
+      .hud .av {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: #eaf8fd;
+        border: 2px solid #cdeaf3;
+        display: grid;
+        place-items: center;
+        font-size: 20px;
+      }
+      .hud .nm {
+        font-size: 14px;
+        font-weight: 800;
+        color: #0d2840;
+        line-height: 1;
+      }
+      .hud .st {
+        font-size: 11px;
+        color: #0e6e8a;
+        font-weight: 700;
+      }
+      .hud .coins {
+        display: flex;
+        gap: 8px;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 13px;
+        font-weight: 800;
+        color: #0d2840;
+        background: #fff;
+        border: 1.5px solid #ffe1a6;
+        border-radius: 999px;
+        padding: 5px 11px;
+        box-shadow: 0 3px 0 #ffe1a6;
+      }
+      .pill.blue {
+        border-color: #bfe9f6;
+        box-shadow: 0 3px 0 #bfe9f6;
+      }
+      /* map animations */
+      .cmap {
+        display: block;
+      }
+      .pathdraw {
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+        animation: draw 2.2s ease-out 0.2s forwards;
+      }
+      @keyframes draw {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      .cmap .candy {
+        animation: cfloat 5s ease-in-out infinite;
+      }
+      @keyframes cfloat {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-6deg);
+        }
+        50% {
+          transform: translateY(-12px) rotate(6deg);
+        }
+      }
+      .cmap .cloud {
+        animation: drift 16s ease-in-out infinite;
+      }
+      @keyframes drift {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(26px);
+        }
+      }
+      .cmap .bob {
+        animation: bob 3.2s ease-in-out infinite;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+      @keyframes bob {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-7px);
+        }
+      }
+      .cmap .glow {
+        animation: glow 2.2s ease-in-out infinite;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+      @keyframes glow {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.22;
+        }
+        50% {
+          transform: scale(1.18);
+          opacity: 0.32;
+        }
+      }
+      .cmap .glow2 {
+        animation: glow2 2.2s ease-in-out infinite;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+      @keyframes glow2 {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scale(1.12);
+          opacity: 0.15;
+        }
+      }
+      .cmap .twinkle {
+        animation: tw 1.8s ease-in-out infinite;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+      @keyframes tw {
+        0%,
+        100% {
+          transform: scale(0.8);
+          opacity: 0.7;
+        }
+        50% {
+          transform: scale(1.15);
+          opacity: 1;
+        }
+      }
+      .cmap .youare-wrap {
+        animation: bob 3.2s ease-in-out infinite;
+      }
+      .cmap .goalbob {
+        animation: bob 2.6s ease-in-out infinite;
+      }
+      .nlab {
+        font-family: "Plus Jakarta Sans";
+        font-size: 15px;
+        font-weight: 800;
+        fill: #fff;
+        paint-order: stroke;
+        stroke: #00000030;
+        stroke-width: 3px;
+      }
+      .nlab.cur {
+        fill: #0d2840;
+        stroke: #ffffff88;
+        stroke-width: 4px;
+      }
+      .nlab.lock {
+        fill: #ffffffcc;
+        font-size: 13px;
+      }
+      /* play button on current */
+      .playbtn {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 16px;
+        z-index: 6;
+        background: linear-gradient(#f6a800, #e8920a);
+        color: #fff;
+        font-weight: 900;
+        font-size: 16px;
+        padding: 15px 40px;
+        border-radius: 999px;
+        box-shadow:
+          0 6px 0 #c47a08,
+          0 12px 24px rgba(246, 168, 0, 0.4);
+        border: none;
+        letter-spacing: 0.3px;
+        animation: bob 2.2s ease-in-out infinite;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+        }
+        .pathdraw {
+          stroke-dashoffset: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="board">
+      <div class="chip">Module 5 · v2 · Child home</div>
+      <h1>The Journey Map</h1>
+      <div class="sub">
+        Candy Crush styled and alive: the path draws on, nodes bounce, the
+        current stage pulses, stars twinkle, clouds and sweets drift. Scroll the
+        phone to climb the journey. The 3D Book will stand on the current stage.
+      </div>
+      <div class="fl">Phone · scroll to climb ↑</div>
+      <div class="phone">
+        <div class="scroller">
+          <div class="hud">
+            <div class="who">
+              <div class="av">👦</div>
+              <div>
+                <div class="nm">Saafir</div>
+                <div class="st">Stage 3 · Muthābir</div>
+              </div>
+            </div>
+            <div class="coins">
+              <span class="pill">⭐ 128</span
+              ><span class="pill blue">🔥 5</span>
+            </div>
+          </div>
+          <svg
+            viewBox="0 0 420 1500"
+            width="100%"
+            xmlns="http://www.w3.org/2000/svg"
+            class="cmap"
+          >
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#FFE29A" />
+                <stop offset=".4" stop-color="#FFC1CF" />
+                <stop offset=".72" stop-color="#F6A8D8" />
+                <stop offset="1" stop-color="#C6A8F6" />
+              </linearGradient>
+              <radialGradient id="nd0" cx=".38" cy=".32" r=".85">
+                <stop offset="0" stop-color="#ffb8d7" />
+                <stop offset=".55" stop-color="#FF7EB6" />
+                <stop offset="1" stop-color="#ad567c" />
+              </radialGradient>
+              <radialGradient id="nd1" cx=".38" cy=".32" r=".85">
+                <stop offset="0" stop-color="#ffca99" />
+                <stop offset=".55" stop-color="#FF9F45" />
+                <stop offset="1" stop-color="#ad6c2f" />
+              </radialGradient>
+              <radialGradient id="nd2" cx=".38" cy=".32" r=".85">
+                <stop offset="0" stop-color="#80d2ef" />
+                <stop offset=".55" stop-color="#19AEE2" />
+                <stop offset="1" stop-color="#11769a" />
+              </radialGradient>
+              <radialGradient id="nd3" cx=".38" cy=".32" r=".85">
+                <stop offset="0" stop-color="#7fdcc6" />
+                <stop offset=".55" stop-color="#16C098" />
+                <stop offset="1" stop-color="#0f8367" />
+              </radialGradient>
+              <radialGradient id="nd4" cx=".38" cy=".32" r=".85">
+                <stop offset="0" stop-color="#bfa5fa" />
+                <stop offset=".55" stop-color="#8B5CF6" />
+                <stop offset="1" stop-color="#5f3fa7" />
+              </radialGradient>
+              <radialGradient id="nd5" cx=".38" cy=".32" r=".85">
+                <stop offset="0" stop-color="#facf73" />
+                <stop offset=".55" stop-color="#F6A800" />
+                <stop offset="1" stop-color="#a77200" />
+              </radialGradient>
+              <radialGradient id="nd6" cx=".38" cy=".32" r=".85">
+                <stop offset="0" stop-color="#ffaeae" />
+                <stop offset=".55" stop-color="#FF6B6B" />
+                <stop offset="1" stop-color="#ad4949" />
+              </radialGradient>
+              <radialGradient id="nd7" cx=".38" cy=".32" r=".85">
+                <stop offset="0" stop-color="#79c1dd" />
+                <stop offset=".55" stop-color="#0B8FC1" />
+                <stop offset="1" stop-color="#076183" />
+              </radialGradient>
+              <radialGradient id="ndlock" cx=".4" cy=".35" r=".8">
+                <stop offset="0" stop-color="#e6edf4" />
+                <stop offset="1" stop-color="#aebccc" />
+              </radialGradient>
+              <pattern
+                id="candy"
+                width="26"
+                height="26"
+                patternUnits="userSpaceOnUse"
+                patternTransform="rotate(45)"
+              >
+                <rect width="26" height="26" fill="#ffffff" />
+                <rect width="13" height="26" fill="#ff9ec4" />
+              </pattern>
+            </defs>
+            <rect width="420" height="1500" fill="url(#sky)" />
+            <!-- rolling hills -->
+            <path
+              d="M0 1500 L0 1360 Q120 1300 240 1350 T420 1330 L420 1500 Z"
+              fill="#7ED957"
+              opacity=".55"
+            />
+            <path
+              d="M0 1500 L0 1420 Q140 1380 300 1420 T420 1410 L420 1500 Z"
+              fill="#5CC93F"
+              opacity=".7"
+            />
+            <ellipse
+              cx="70"
+              cy="700"
+              rx="150"
+              ry="150"
+              fill="#ffffff"
+              opacity=".06"
+            />
+            <ellipse
+              cx="360"
+              cy="1050"
+              rx="130"
+              ry="130"
+              fill="#ffffff"
+              opacity=".06"
+            />
+            <text
+              class="candy"
+              style="animation-delay: 0s"
+              x="58"
+              y="1300"
+              font-size="30"
+              text-anchor="middle"
+            >
+              🍬
+            </text>
+            <text
+              class="candy"
+              style="animation-delay: 0.5s"
+              x="360"
+              y="1240"
+              font-size="30"
+              text-anchor="middle"
+            >
+              🍭
+            </text>
+            <text
+              class="candy"
+              style="animation-delay: 1s"
+              x="70"
+              y="1080"
+              font-size="30"
+              text-anchor="middle"
+            >
+              🍩
+            </text>
+            <text
+              class="candy"
+              style="animation-delay: 1.5s"
+              x="350"
+              y="980"
+              font-size="30"
+              text-anchor="middle"
+            >
+              🧁
+            </text>
+            <text
+              class="candy"
+              style="animation-delay: 2s"
+              x="56"
+              y="860"
+              font-size="30"
+              text-anchor="middle"
+            >
+              ⭐
+            </text>
+            <text
+              class="candy"
+              style="animation-delay: 0s"
+              x="360"
+              y="760"
+              font-size="30"
+              text-anchor="middle"
+            >
+              🍪
+            </text>
+            <text
+              class="candy"
+              style="animation-delay: 0.5s"
+              x="66"
+              y="600"
+              font-size="30"
+              text-anchor="middle"
+            >
+              🌟
+            </text>
+            <text
+              class="candy"
+              style="animation-delay: 1s"
+              x="356"
+              y="520"
+              font-size="30"
+              text-anchor="middle"
+            >
+              🍬
+            </text>
+            <text
+              class="candy"
+              style="animation-delay: 1.5s"
+              x="60"
+              y="360"
+              font-size="30"
+              text-anchor="middle"
+            >
+              🍭
+            </text>
+            <text
+              class="candy"
+              style="animation-delay: 2s"
+              x="354"
+              y="300"
+              font-size="30"
+              text-anchor="middle"
+            >
+              🍩
+            </text>
+            <text
+              class="candy"
+              style="animation-delay: 0s"
+              x="70"
+              y="180"
+              font-size="30"
+              text-anchor="middle"
+            >
+              🧁
+            </text>
+            <text
+              class="candy"
+              style="animation-delay: 0.5s"
+              x="348"
+              y="150"
+              font-size="30"
+              text-anchor="middle"
+            >
+              ⭐
+            </text>
+            <g
+              class="cloud"
+              style="animation-delay: 0s"
+              transform="translate(120,240) scale(1)"
+            >
+              <ellipse
+                cx="0"
+                cy="0"
+                rx="42"
+                ry="22"
+                fill="#fff"
+                opacity=".85"
+              />
+              <ellipse
+                cx="30"
+                cy="6"
+                rx="30"
+                ry="18"
+                fill="#fff"
+                opacity=".85"
+              />
+              <ellipse
+                cx="-28"
+                cy="6"
+                rx="26"
+                ry="16"
+                fill="#fff"
+                opacity=".85"
+              />
+            </g>
+            <g
+              class="cloud"
+              style="animation-delay: 1.3s"
+              transform="translate(300,540) scale(0.8)"
+            >
+              <ellipse
+                cx="0"
+                cy="0"
+                rx="42"
+                ry="22"
+                fill="#fff"
+                opacity=".85"
+              />
+              <ellipse
+                cx="30"
+                cy="6"
+                rx="30"
+                ry="18"
+                fill="#fff"
+                opacity=".85"
+              />
+              <ellipse
+                cx="-28"
+                cy="6"
+                rx="26"
+                ry="16"
+                fill="#fff"
+                opacity=".85"
+              />
+            </g>
+            <g
+              class="cloud"
+              style="animation-delay: 2.6s"
+              transform="translate(90,900) scale(1.1)"
+            >
+              <ellipse
+                cx="0"
+                cy="0"
+                rx="42"
+                ry="22"
+                fill="#fff"
+                opacity=".85"
+              />
+              <ellipse
+                cx="30"
+                cy="6"
+                rx="30"
+                ry="18"
+                fill="#fff"
+                opacity=".85"
+              />
+              <ellipse
+                cx="-28"
+                cy="6"
+                rx="26"
+                ry="16"
+                fill="#fff"
+                opacity=".85"
+              />
+            </g>
+            <g
+              class="cloud"
+              style="animation-delay: 3.9s"
+              transform="translate(320,1180) scale(0.9)"
+            >
+              <ellipse
+                cx="0"
+                cy="0"
+                rx="42"
+                ry="22"
+                fill="#fff"
+                opacity=".85"
+              />
+              <ellipse
+                cx="30"
+                cy="6"
+                rx="30"
+                ry="18"
+                fill="#fff"
+                opacity=".85"
+              />
+              <ellipse
+                cx="-28"
+                cy="6"
+                rx="26"
+                ry="16"
+                fill="#fff"
+                opacity=".85"
+              />
+            </g>
+            <!-- PATH -->
+            <path
+              d="M 140.0 1380.0 C 165.3 1350.0 295.3 1260.0 292.0 1200.0 C 288.7 1140.0 118.7 1079.7 120.0 1020.0 C 121.3 960.3 295.0 901.7 300.0 842.0 C 305.0 782.3 152.3 721.7 150.0 662.0 C 147.7 602.3 289.0 544.3 286.0 484.0 C 283.0 423.7 131.3 360.7 132.0 300.0 C 132.7 239.3 263.7 150.0 290.0 120.0 "
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="34"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              opacity=".9"
+            />
+            <path
+              class="pathdraw"
+              d="M 140.0 1380.0 C 165.3 1350.0 295.3 1260.0 292.0 1200.0 C 288.7 1140.0 118.7 1079.7 120.0 1020.0 C 121.3 960.3 295.0 901.7 300.0 842.0 C 305.0 782.3 152.3 721.7 150.0 662.0 C 147.7 602.3 289.0 544.3 286.0 484.0 C 283.0 423.7 131.3 360.7 132.0 300.0 C 132.7 239.3 263.7 150.0 290.0 120.0 "
+              pathLength="1"
+              fill="none"
+              stroke="url(#candy)"
+              stroke-width="22"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <!-- start & goal flags -->
+            <text x="140" y="1472" text-anchor="middle" font-size="30">🏁</text>
+            <g class="goalbob">
+              <text x="290" y="50" text-anchor="middle" font-size="40">🏆</text>
+            </g>
+            <g class="cnode bob" style="animation-delay: 0s">
+              <ellipse
+                cx="140"
+                cy="1430"
+                rx="36.800000000000004"
+                ry="9"
+                fill="#00000022"
+              />
+              <circle
+                cx="140"
+                cy="1380"
+                r="46"
+                fill="url(#nd0)"
+                stroke="#fff"
+                stroke-width="5"
+              />
+              <ellipse
+                cx="128"
+                cy="1364"
+                rx="18"
+                ry="11"
+                fill="#ffffff"
+                opacity=".45"
+              />
+              <path
+                d="M127 1380 l9 10 17 -20"
+                fill="none"
+                stroke="#fff"
+                stroke-width="6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </g>
+            <polygon
+              class="twinkle"
+              style="animation-delay: 0s"
+              points="114.0,1432.0 116.6,1438.4 123.5,1438.9 118.3,1443.4 119.9,1450.1 114.0,1446.5 108.1,1450.1 109.7,1443.4 104.5,1438.9 111.4,1438.4"
+              fill="#FFD23F"
+              stroke="#F6A800"
+              stroke-width="1.5"
+            />
+            <polygon
+              class="twinkle"
+              style="animation-delay: 0.3s"
+              points="140.0,1436.0 143.2,1443.6 151.4,1444.3 145.1,1449.7 147.1,1457.7 140.0,1453.4 132.9,1457.7 134.9,1449.7 128.6,1444.3 136.8,1443.6"
+              fill="#FFD23F"
+              stroke="#F6A800"
+              stroke-width="1.5"
+            />
+            <polygon
+              class="twinkle"
+              style="animation-delay: 0.6s"
+              points="166.0,1432.0 168.6,1438.4 175.5,1438.9 170.3,1443.4 171.9,1450.1 166.0,1446.5 160.1,1450.1 161.7,1443.4 156.5,1438.9 163.4,1438.4"
+              fill="#FFD23F"
+              stroke="#F6A800"
+              stroke-width="1.5"
+            />
+            <text x="140" y="1322" text-anchor="middle" class="nlab">
+              Mubtadiʼ
+            </text>
+            <g class="cnode bob" style="animation-delay: 0.4s">
+              <ellipse
+                cx="292"
+                cy="1250"
+                rx="36.800000000000004"
+                ry="9"
+                fill="#00000022"
+              />
+              <circle
+                cx="292"
+                cy="1200"
+                r="46"
+                fill="url(#nd1)"
+                stroke="#fff"
+                stroke-width="5"
+              />
+              <ellipse
+                cx="280"
+                cy="1184"
+                rx="18"
+                ry="11"
+                fill="#ffffff"
+                opacity=".45"
+              />
+              <path
+                d="M279 1200 l9 10 17 -20"
+                fill="none"
+                stroke="#fff"
+                stroke-width="6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </g>
+            <polygon
+              class="twinkle"
+              style="animation-delay: 0s"
+              points="266.0,1252.0 268.6,1258.4 275.5,1258.9 270.3,1263.4 271.9,1270.1 266.0,1266.5 260.1,1270.1 261.7,1263.4 256.5,1258.9 263.4,1258.4"
+              fill="#FFD23F"
+              stroke="#F6A800"
+              stroke-width="1.5"
+            />
+            <polygon
+              class="twinkle"
+              style="animation-delay: 0.3s"
+              points="292.0,1256.0 295.2,1263.6 303.4,1264.3 297.1,1269.7 299.1,1277.7 292.0,1273.4 284.9,1277.7 286.9,1269.7 280.6,1264.3 288.8,1263.6"
+              fill="#FFD23F"
+              stroke="#F6A800"
+              stroke-width="1.5"
+            />
+            <polygon
+              class="twinkle"
+              style="animation-delay: 0.6s"
+              points="318.0,1252.0 320.6,1258.4 327.5,1258.9 322.3,1263.4 323.9,1270.1 318.0,1266.5 312.1,1270.1 313.7,1263.4 308.5,1258.9 315.4,1258.4"
+              fill="#FFD23F"
+              stroke="#F6A800"
+              stroke-width="1.5"
+            />
+            <text x="292" y="1142" text-anchor="middle" class="nlab">
+              Mutaʼallim
+            </text>
+            <g class="cnode">
+              <circle
+                class="glow"
+                cx="120"
+                cy="1020"
+                r="64"
+                fill="#19AEE2"
+                opacity=".22"
+              />
+              <circle
+                class="glow2"
+                cx="120"
+                cy="1020"
+                r="54"
+                fill="none"
+                stroke="#19AEE2"
+                stroke-width="3"
+                opacity=".5"
+              />
+              <ellipse
+                cx="120"
+                cy="1070"
+                rx="36.800000000000004"
+                ry="9"
+                fill="#00000022"
+              />
+              <circle
+                cx="120"
+                cy="1020"
+                r="46"
+                fill="url(#nd2)"
+                stroke="#fff"
+                stroke-width="6"
+              />
+              <ellipse
+                cx="108"
+                cy="1004"
+                rx="18"
+                ry="11"
+                fill="#ffffff"
+                opacity=".5"
+              />
+              <text
+                x="120"
+                y="1029"
+                text-anchor="middle"
+                fill="#fff"
+                font-weight="900"
+                font-size="30"
+              >
+                3
+              </text>
+            </g>
+            <g class="youare-wrap">
+              <rect
+                x="68"
+                y="928"
+                width="104"
+                height="30"
+                rx="15"
+                fill="#0d2840"
+              />
+              <text
+                x="120"
+                y="948"
+                text-anchor="middle"
+                fill="#fff"
+                font-size="12"
+                font-weight="800"
+                letter-spacing=".4"
+              >
+                YOU'RE HERE
+              </text>
+              <path d="M113 958 l7 8 7 -8 Z" fill="#0d2840" />
+            </g>
+            <text x="120" y="1094" text-anchor="middle" class="nlab cur">
+              Muthābir
+            </text>
+            <g class="cnode bob" style="animation-delay: 1.2s">
+              <ellipse
+                cx="300"
+                cy="892"
+                rx="32.199999999999996"
+                ry="8"
+                fill="#00000018"
+              />
+              <circle
+                cx="300"
+                cy="842"
+                r="42"
+                fill="url(#ndlock)"
+                stroke="#fff"
+                stroke-width="4"
+              />
+              <ellipse
+                cx="290"
+                cy="828"
+                rx="15"
+                ry="9"
+                fill="#ffffff"
+                opacity=".4"
+              />
+              <path
+                d="M289 840 v-6 a11 11 0 0 1 22 0 v6"
+                fill="none"
+                stroke="#fff"
+                stroke-width="4"
+              />
+              <rect x="286" y="840" width="28" height="21" rx="5" fill="#fff" />
+            </g>
+            <text x="300" y="788" text-anchor="middle" class="nlab lock">
+              Mutawassit
+            </text>
+            <g class="cnode bob" style="animation-delay: 0s">
+              <ellipse
+                cx="150"
+                cy="712"
+                rx="32.199999999999996"
+                ry="8"
+                fill="#00000018"
+              />
+              <circle
+                cx="150"
+                cy="662"
+                r="42"
+                fill="url(#ndlock)"
+                stroke="#fff"
+                stroke-width="4"
+              />
+              <ellipse
+                cx="140"
+                cy="648"
+                rx="15"
+                ry="9"
+                fill="#ffffff"
+                opacity=".4"
+              />
+              <path
+                d="M139 660 v-6 a11 11 0 0 1 22 0 v6"
+                fill="none"
+                stroke="#fff"
+                stroke-width="4"
+              />
+              <rect x="136" y="660" width="28" height="21" rx="5" fill="#fff" />
+            </g>
+            <text x="150" y="608" text-anchor="middle" class="nlab lock">
+              Mujtahid
+            </text>
+            <g class="cnode bob" style="animation-delay: 0.4s">
+              <ellipse
+                cx="286"
+                cy="534"
+                rx="32.199999999999996"
+                ry="8"
+                fill="#00000018"
+              />
+              <circle
+                cx="286"
+                cy="484"
+                r="42"
+                fill="url(#ndlock)"
+                stroke="#fff"
+                stroke-width="4"
+              />
+              <ellipse
+                cx="276"
+                cy="470"
+                rx="15"
+                ry="9"
+                fill="#ffffff"
+                opacity=".4"
+              />
+              <path
+                d="M275 482 v-6 a11 11 0 0 1 22 0 v6"
+                fill="none"
+                stroke="#fff"
+                stroke-width="4"
+              />
+              <rect x="272" y="482" width="28" height="21" rx="5" fill="#fff" />
+            </g>
+            <text x="286" y="430" text-anchor="middle" class="nlab lock">
+              Mutaqaddim
+            </text>
+            <g class="cnode bob" style="animation-delay: 0.8s">
+              <ellipse
+                cx="132"
+                cy="350"
+                rx="32.199999999999996"
+                ry="8"
+                fill="#00000018"
+              />
+              <circle
+                cx="132"
+                cy="300"
+                r="42"
+                fill="url(#ndlock)"
+                stroke="#fff"
+                stroke-width="4"
+              />
+              <ellipse
+                cx="122"
+                cy="286"
+                rx="15"
+                ry="9"
+                fill="#ffffff"
+                opacity=".4"
+              />
+              <path
+                d="M121 298 v-6 a11 11 0 0 1 22 0 v6"
+                fill="none"
+                stroke="#fff"
+                stroke-width="4"
+              />
+              <rect x="118" y="298" width="28" height="21" rx="5" fill="#fff" />
+            </g>
+            <text x="132" y="246" text-anchor="middle" class="nlab lock">
+              Mutqin
+            </text>
+            <g class="cnode bob" style="animation-delay: 1.2s">
+              <ellipse
+                cx="290"
+                cy="170"
+                rx="32.199999999999996"
+                ry="8"
+                fill="#00000018"
+              />
+              <circle
+                cx="290"
+                cy="120"
+                r="42"
+                fill="url(#ndlock)"
+                stroke="#fff"
+                stroke-width="4"
+              />
+              <ellipse
+                cx="280"
+                cy="106"
+                rx="15"
+                ry="9"
+                fill="#ffffff"
+                opacity=".4"
+              />
+              <path
+                d="M279 118 v-6 a11 11 0 0 1 22 0 v6"
+                fill="none"
+                stroke="#fff"
+                stroke-width="4"
+              />
+              <rect x="276" y="118" width="28" height="21" rx="5" fill="#fff" />
+            </g>
+            <text x="290" y="66" text-anchor="middle" class="nlab lock">
+              Ḥāfiẓ
+            </text>
+          </svg>
+        </div>
+        <button class="playbtn">▶ Continue</button>
+      </div>
+    </div>
+  </body>
+</html>
